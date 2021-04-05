@@ -72,7 +72,7 @@ def feral_extraction_fn(row, string_clean_capital_fn):
 
     feral_list = []
     feral_evid_list = []
-    for i in range(6):  # todo confirm that there are only 6 feral
+    for i in range(6):
         str(i + 1)
         feral = string_clean_capital_fn(str(row['GROUP_FERAL:FERAL' + str(i + 1)]))
         feral_list.append(feral)

@@ -106,7 +106,7 @@ def field_adjusted_fn(field, adjusted, represent):
             :param adjusted: string object containing the adjusted name variable.
             :param represent: string object containing the represent variable."""
 
-    if represent == 'representative':  # todo correct spelling in odk form
+    if represent == 'representative':
         final = field
 
     else:

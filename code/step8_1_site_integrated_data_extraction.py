@@ -246,10 +246,10 @@ def disturbance_ver_data_fn(inter, site_dir):
     """ Extract disturbance variables from the integrated data frame as list items for vertical insertion into a
     worksheet.
 
-    :param inter: pandas  data frame object.
-    :param site_dir: string object containing the path to the site directory.
-    :return disturb_vert_list12345678: list object containing list elements ready for vertical insertion,
-    including: clearing, photo file names and erosion information."""
+            :param inter: pandas  data frame object.
+            :param site_dir: string object containing the path to the site directory.
+            :return disturb_vert_list12345678: list object containing list elements ready for vertical insertion,
+            including: clearing, photo file names and erosion information."""
 
     dist_ver_list1 = [inter.clearing[0], inter.cyclone[0], inter.dieback[0]]
 

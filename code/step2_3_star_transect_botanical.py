@@ -40,7 +40,7 @@ def extract_botanical_fn(row, string_clean_capital_fn, n):
     list_botanical = []
 
     for i in range(10):
-        # todo this is the correct multiselect for veg
+
         botanical = string_clean_capital_fn(str(row[n + '_SP:' + n + str(i + 1)]))
         if botanical == 'Other1':
             final_botanical = string_clean_capital_fn(str(row[n + '_SP:' + n + '_OTHER1']))
@@ -59,7 +59,7 @@ def extract_botanical_fn(row, string_clean_capital_fn, n):
     return list_botanical
 
 
-def species_extraction_fn(row, string_clean_capital_fn, n):  # todo
+def species_extraction_fn(row, string_clean_capital_fn, n):
     """ Extract the botanical names and cover fraction values.
 
             :param row: pandas dataframe row value object.
@@ -98,7 +98,6 @@ def botanical_extraction_fn(string_clean_capitalize_fn, match_list, input_name_l
             match (variable -> variable) or no match (variable -> float(9999.0) has been determined.
             :return list_cover_no_match:list object of the same size as the input list (n) after
             match (variable -> variable) or no match (variable -> float(9999.0) has been determined."""
-    # todo remove comment and update all other veg lists.
 
     list_botanical_match = []
     list_botanical_no_match = []

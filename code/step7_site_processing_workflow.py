@@ -263,7 +263,6 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
         basal_data_list = basal_hor_list1234[0], basal_hor_list1234[1], basal_hor_list1234[2], basal_hor_list1234[3], \
                           basal_vert_list123[0], basal_vert_list123[1], basal_vert_list123[2]
 
-        print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$', basal_data_list)
         woody_data_list = woody_vert_list12345678910
 
         ground_data_list = ground_vert_list12345
@@ -277,34 +276,24 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
         ras_data_list = [ras_hort_list1234567891011121314[0], ras_hort_list1234567891011121314[1],
                          ras_hort_list1234567891011121314[2], ras_hort_list1234567891011121314[3],
                          ras_hort_list1234567891011121314[4], ras_hort_list1234567891011121314[5],
-                         ras_hort_list1234567891011121314[6],
-                         ras_hort_list1234567891011121314[7],
-                         ras_hort_list1234567891011121314[8],
-                         ras_hort_list1234567891011121314[9],
-                         ras_vert_list123456789101112[0],
-                         ras_hort_list1234567891011121314[10],
-                         ras_hort_list1234567891011121314[11],
-                         ras_hort_list1234567891011121314[12],
-                         ras_hort_list1234567891011121314[13],
-                         ras_vert_list123456789101112[1],
-                         ras_vert_list123456789101112[2],
-                         ras_vert_list123456789101112[3],
-                         ras_vert_list123456789101112[4],
-                         ras_vert_list123456789101112[5],
-                         ras_vert_list123456789101112[6],
-                         ras_vert_list123456789101112[7],
-                         ras_vert_list123456789101112[8],
-                         ras_vert_list123456789101112[9],
-                         ras_vert_list123456789101112[10],
-                         ras_vert_list123456789101112[11]]
+                         ras_hort_list1234567891011121314[6], ras_vert_list123456789101112[0],
+                         ras_vert_list123456789101112[1], ras_vert_list123456789101112[2],
+                         ras_vert_list123456789101112[3], ras_vert_list123456789101112[4],
+                         ras_hort_list1234567891011121314[7], ras_hort_list1234567891011121314[8],
+                         ras_vert_list123456789101112[4], ras_vert_list123456789101112[5],
+                         ras_hort_list1234567891011121314[9], ras_vert_list123456789101112[7],
+                         ras_vert_list123456789101112[8], ras_hort_list1234567891011121314[9],
+                         ras_hort_list1234567891011121314[10], ras_hort_list1234567891011121314[11],
+                         ras_hort_list1234567891011121314[12], ['TO DOOOOO'],
+                         ras_vert_list123456789101112[1], ras_vert_list123456789101112[10],
+                         ras_vert_list123456789101112[11], ras_hort_list1234567891011121314[13]]
 
+        print('ras_data_list: ', ras_data_list)
         obs_data_list = [establish_data_list, visit_data_list, disturbance_data_list, basal_data_list, woody_data_list,
                          ground_data_list, estimates_data_list, estimates_veg_data_list, condition_data_list]
 
         # create paths to the required sit csv files
-
         ras_csv = os.path.join(site_dir, site + '_clean_ras.csv')
-
         star_csv = os.path.join(site_dir, site + '_clean_star_transect.csv')
 
         if remote_desktop == 'Yes':
@@ -332,15 +321,15 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
 
             # if star transect for the site exists -- create an observational sheet and populate.
             star_csv = os.path.join(site_dir, site + '_clean_star_transect.csv')
-            # print(star_csv)
+
             if os.path.isfile(star_csv):
                 star = pd.read_csv(star_csv).fillna('BLANK').replace('Nan', 'BLANK')
                 print('step9_1_aggregate_transect_bypass_not_remote_desktop.py initiating..........')
                 # call the step9_1_aggregate_transect_bypass_not_remote_desktop.py script.
                 import step9_1_aggregate_transect_bypass_not_remote_desktop
-                step9_1_aggregate_transect_bypass_not_remote_desktop.main_routine(directory_odk, obs_data_list,
-                                                                                  ras_data_list,
-                                                                                  site, site_dir, star)
+                step9_1_aggregate_transect_bypass_not_remote_desktop.main_routine(
+                    directory_odk, obs_data_list, ras_data_list, site, site_dir, star)
+
             elif os.path.isfile(ras_csv):
                 ras = pd.read_csv(ras_csv).fillna('BLANK').replace('Nan', 'BLANK')
 
@@ -348,8 +337,6 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
                 import step11_1_site_ras_processing_workflow
                 step11_1_site_ras_processing_workflow.main_routine(
                     ras_data_list, site, site_dir, ras)
-
-    return obs_data_list, ras_data_list, site, site_dir, star_csv
 
 
 """ ---------------------------------------------------------------------------------------------"""
@@ -367,10 +354,7 @@ def main_routine(directory_odk, file_path, remote_desktop, temp_dir, veg_list_ex
     # call the listOfDirectoriesFN function
     site_dir_path_list = list_of_directories_fn(dir_path)
 
-    obs_data_list, ras_data_list, site, site_dir, star_csv = data_extraction_workflow_fn(directory_odk,
-                                                                                         site_dir_path_list,
-                                                                                         remote_desktop, veg_list_excel,
-                                                                                         shrub_list_excel)
+    data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_desktop, veg_list_excel, shrub_list_excel)
 
     print('step7_site_processing_workflow.py COMPLETE.')
 

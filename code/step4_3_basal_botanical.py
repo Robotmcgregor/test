@@ -37,7 +37,7 @@ def extract_botanical_fn(row, string_clean_capital_fn, n):
     list_botanical = []
 
     for i in range(5):
-        # todo this is the correct multiselect for veg
+
         botanical = string_clean_capital_fn(str(row[n + '_SP:' + n + str(i + 1)]))
         if botanical == 'Other1':
             final_botanical = string_clean_capital_fn(str(row[n + '_SP:' + n + '_OTHER1']))

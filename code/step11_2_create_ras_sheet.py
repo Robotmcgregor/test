@@ -18,12 +18,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 SOFTWARE.
 """
 
-
 # import modules
 
 
 def create_worksheet_fn(workbook, worksheet_name):
     """ Create worksheet and set row height.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet_name: string object containing worksheet name.
             :return: workbook: updated workbook object.
@@ -39,6 +39,7 @@ def create_worksheet_fn(workbook, worksheet_name):
 
 def insert_sheet_headings_fn(workbook, worksheet, heading3, heading4, heading6, color_fill):
     """ Add item headings to cells as strings.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading3: workbook style derived  from define heading3_fn.
@@ -118,6 +119,7 @@ def insert_sheet_headings_fn(workbook, worksheet, heading3, heading4, heading6, 
 
 def insert_blank_formatted_cells_fn(workbook, worksheet, heading7):
     """ Add blank formatted cells to worksheet.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading7: workbook style derived  from define heading7_fn.
@@ -285,8 +287,7 @@ def define_column_widths_fn(workbook, worksheet):
 
     :param workbook: workbook object created in the create_workbook_fn function.
     :param worksheet: excel sheet created with the create_worksheet_fn function.
-    :return: formatted worksheet
-    """
+    :return: formatted worksheet. """
 
     worksheet.set_column('A:A', 37.82)
     worksheet.set_column('B:B', 18.45)
@@ -300,23 +301,6 @@ def define_column_widths_fn(workbook, worksheet):
     return workbook, worksheet
 
 
-"""def insertDataFN(worksheet, row, column, input_list):
-    # Establish data entery position.
-    row = row
-    col = column
-
-    # Iterate over the data and write it out row by row.
-    for item in input_list:
-        print(item)
-        if item == 'BLANK':
-            # row +=1
-            print(item)
-
-        else:
-            worksheet.write(row, col, item)
-        row += 1"""
-
-
 def insert_vertical_data_fn(worksheet, row, col, input_list, style, factor):
     """ Insert list of data vertically.
 
@@ -325,9 +309,7 @@ def insert_vertical_data_fn(worksheet, row, col, input_list, style, factor):
         :param col: integer used to define which column to insert a list object.
         :param input_list: list object containing variables for worksheet insertion.
         :param style: text style (i.e. heading 1-7)
-        :param factor: integer defines the cell/row increment for list insertion.
-        :type input_list: object
-        """
+        :param factor: integer defines the cell/row increment for list insertion. """
 
     if input_list:
         # Iterate over the data and write it out row by row.
@@ -344,9 +326,7 @@ def insert_horizontal_data_fn(worksheet, row, col, input_list, style, factor):
         :param col: integer used to define which column to insert a list object.
         :param input_list: list object containing variables for worksheet insertion.
         :param style: text style (i.e. heading 1-7)
-        :param factor: integer defines the cell/row increment for list insertion.
-        :type input_list: object
-        """
+        :param factor: integer defines the cell/row increment for list insertion. """
 
     if input_list:
         # Iterate over the data and write it out row by row.
@@ -357,7 +337,20 @@ def insert_horizontal_data_fn(worksheet, row, col, input_list, style, factor):
 
 def main_routine(color_fill, heading1, heading2, heading3, heading4, heading6, heading7, ras_data_list,
                  site, workbook):
-    print('step_11_2_create_ras_sheet.py INITIATED.')
+    """Create the Rangeland Monitoring rapid assessment survey (ras) excel workbook.
+
+        :return colour_fill: workbook cell fill style.
+        :param heading1: workbook heading style.
+        :param heading2: workbook heading style.
+        :param heading3: workbook heading style.
+        :param heading4: workbook heading style.
+        :param heading6: workbook heading style.
+        :param heading7: workbook heading style.
+        :param workbook: workbook object created in the create_workbook_fn function.
+        :param ras_data_list: list object containing list elements of variable fro insertion.
+        :param site: string object containing the site name. """
+
+    print('step11_2_create_ras_sheet.py INITIATED.')
 
     worksheet_name = 'Rangeland Monitoring - RAS'
 
@@ -466,10 +459,14 @@ def main_routine(color_fill, heading1, heading2, heading3, heading4, heading6, h
         print('ras_data_list[18]: ', ras_data_list[18])
         insert_vertical_data_fn(worksheet, 29, 2, ras_data_list[18], heading7, 1)
 
+        #todo erosion comment not functioning
         erosion_comment = ['BLANK', 'BLANK', 'BLANK', 'BLANK', 'BLANK']
-
+        print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')#todo the erosion comment is not functioning properly.
+        print('ras_data_list[18]: ', ras_data_list[18])
         for i in ras_data_list[18]:
+            print('ras_data_list[18]: ', ras_data_list[18])
             if i != 'BLANK':
+                print(i)
                 list_index = ras_data_list[19].index(i)
                 print('list item is : ', str(list_index) + 1)
                 erosion_comment.insert(list_index, ras_data_list[19][0])
@@ -540,7 +537,7 @@ def main_routine(color_fill, heading1, heading2, heading3, heading4, heading6, h
     #TODO remove if increase tree and shrub choices to 6
 
     workbook.close()
-    print('step_11_2_create_ras_sheet.py COMPLETE.')
+    print('step11_2_create_ras_sheet.py COMPLETE.')
     print(site, ' workbook complete!!!!!!')
 
     return site

@@ -320,8 +320,8 @@ def main_routine(file_path, temp_dir, veg_list_excel):
 
     #todo ras need to have prop code call in the estade shapefile and concatinate it to the begining of the ras number
 
-    """ras_df['final_prop'] = ras_df['prop'].fillna(ras_df['unlist_prop'])
-    csv_output = (temp_dir + '\\clean_ras.csv')"""
+    """ras_df['final_prop'] = ras_df['prop'].fillna(ras_df['unlist_prop'])"""
+    csv_output = (temp_dir + '\\clean_ras.csv')
 
     ras_df.to_csv(csv_output)
 

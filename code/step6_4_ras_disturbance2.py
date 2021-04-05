@@ -50,12 +50,12 @@ def erosion_fn(row, string_clean_capital_fn):
 def condition_fn(row, string_clean_capital_fn):
     """ Extract the condition score information.
 
-        :param row: pandas dataframe row value object.
-        :param string_clean_capital_fn: function to remove whitespaces and clean strings.
-        :return: output_list: list object containing three variables: condition, cond_note, dev_note."""
+            :param row: pandas dataframe row value object.
+            :param string_clean_capital_fn: function to remove whitespaces and clean strings.
+            :return: output_list: list object containing three variables: condition, cond_note, dev_note."""
 
     condition = string_clean_capital_fn(
-        str(row['CONDITION:CONDITION_SCORE']))  # todo do i want this one being cleaned?
+        str(row['CONDITION:CONDITION_SCORE']))
     cond_note = string_clean_capital_fn(str(row['CONDITION:VISIT_NOTES']))
     dev_note = string_clean_capital_fn(str(row['CONDITION:DEV_NOTE']))
 

@@ -51,7 +51,7 @@ def clearing_cyclone_dieback_fn(dist_list):
             :return: output_list: ordered list object that was matched from ordered_list variables within the dist_list
             of three variables: 'clearing', 'cyclone', 'dieback'."""
 
-    ordered_list = ['clearing', 'cyclone', 'dieback']  # todo change this to present or absent?
+    ordered_list = ['clearing', 'cyclone', 'dieback']
     output_list = []
     for n in ordered_list:
         variable = ([elt for elt in dist_list if n in elt])
@@ -385,8 +385,6 @@ def main_routine(clean_list, row, string_clean_capital_fn):
 
     # call the feral_extraction_fn function
     feral_other, feral_evid_other = feral_other_extraction_fn(row, string_clean_capital_fn)
-
-    # TODO do these lists need to be extended?
 
     final_list = [np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
     required_list = ['Camel', 'Rabbit', 'Donkey', 'Horse', 'Pig', 'Buffalo',

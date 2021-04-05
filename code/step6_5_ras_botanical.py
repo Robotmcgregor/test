@@ -39,7 +39,6 @@ def extract_botanical_fn(row, string_clean_capital_fn, n):
 
     for i in range(4):
 
-        # todo this is the correct multiselect for veg
         botanical = string_clean_capital_fn(str(row[n + '_SP:' + n + str(i + 1)]))
         if botanical != 'Other1' or 'Other2' or 'Other3' or 'Other4' or 'Other5':
             botanical = botanical
@@ -63,7 +62,7 @@ def basal_density_fn(row):
     
     :param row: pandas dataframe row value object.
     :return basal_density_list: list object containing three variables: 
-    basal, tree_density, shrub_density. """#todo converted to float  from str?
+    basal, tree_density, shrub_density. """
 
     basal = float(row['BASAL_AREA'])
     tree_density = float(row['WOODY_THICKENING:TREE_COVER'])

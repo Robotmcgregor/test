@@ -18,16 +18,17 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 SOFTWARE.
 """
 
-"""Recreate the Rangeland Monitoring Excel workbook with the xlsxwriter module"""
 # import modules
 import xlsxwriter
 
 
 def create_workbook(site_dir, site):
     """Create an empty excel workbook.
+
             :param site_dir: sting object containing the path to the working site folder.
             :param site: string object containing the site name.
             :return: workbook: empty workbook object created in the site_dir directory ready for data insertion."""
+
     # todo need to add property encase names are similar
     workbook = xlsxwriter.Workbook(site_dir + '//' + site + '.xlsx')
 
@@ -36,6 +37,7 @@ def create_workbook(site_dir, site):
 
 def define_heading1(workbook):
     """ Define heading1 formatting.
+
         :param workbook: workbook object created in the create_workbook_fn function.
         :return heading1: workbook heading style."""
 
@@ -55,6 +57,7 @@ def define_heading1(workbook):
 
 def define_heading2(workbook):
     """ Define heading2 formatting.
+
         :param workbook: workbook object created in the create_workbook_fn function.
         :return heading2: workbook heading style."""
 
@@ -74,6 +77,7 @@ def define_heading2(workbook):
 
 def define_heading3(workbook):
     """ Define heading3 formatting.
+
         :param workbook: workbook object created in the create_workbook_fn function.
         :return heading3: workbook heading style."""
 
@@ -93,6 +97,7 @@ def define_heading3(workbook):
 
 def define_heading4(workbook):
     """ Define heading4 formatting.
+
         :param workbook: workbook object created in the create_workbook_fn function.
         :return heading4: workbook heading style."""
 
@@ -112,6 +117,7 @@ def define_heading4(workbook):
 
 def define_heading5(workbook):
     """ Define heading5 formatting.
+
         :param workbook: workbook object created in the create_workbook_fn function.
         :return heading5: workbook heading style."""
 
@@ -131,6 +137,7 @@ def define_heading5(workbook):
 
 def define_heading6(workbook):
     """ Define heading6 formatting.
+
         :param workbook: workbook object created in the create_workbook_fn function.
         :return heading6: workbook heading style."""
 
@@ -149,6 +156,7 @@ def define_heading6(workbook):
 
 def define_heading7(workbook):
     """ Define heading7 formatting.
+
         :param workbook: workbook object created in the create_workbook_fn function.
         :return heading7: workbook heading style."""
 
@@ -166,6 +174,7 @@ def define_heading7(workbook):
 
 def define_heading8(workbook):
     """ Define heading8 formatting.
+
         :param workbook: workbook object created in the create_workbook_fn function.
         :return heading8: workbook heading style."""
 
@@ -184,6 +193,7 @@ def define_heading8(workbook):
 
 def define_colour_fill(workbook):
     """ Define heading3 formatting.
+
         :param workbook: workbook object created in the create_workbook_fn function.
         :return colour_fill: workbook cell fill style."""
 
@@ -196,8 +206,9 @@ def define_colour_fill(workbook):
 
 
 def main_routine(ras_data_list, site, site_dir, ras):
-    """Recreate the Rangeland Monitoring rapid assessment excel workbook.
-        :param ras_data_list:
+    """Create the Rangeland Monitoring rapid assessment survey (ras) excel workbook.
+
+        :param ras_data_list: list object containing list elements of variable fro insertion.
         :param site: string object containing the site name.
         :param site_dir: sting object containing the path to the working site folder.
         :param ras: open pandas data frame containing site specific ras information."""
@@ -237,8 +248,8 @@ def main_routine(ras_data_list, site, site_dir, ras):
     print('step11_2_site_create_ras_sheet.py initiating..........')
 
     # call the step10_3_site_create_establishment_sheet.py script.
-    import step_11_2_create_ras_sheet
-    step_11_2_create_ras_sheet.main_routine(
+    import step11_2_create_ras_sheet
+    step11_2_create_ras_sheet.main_routine(
         color_fill, heading1, heading2, heading3, heading4, heading6, heading7, ras_data_list,
         site, workbook)
 

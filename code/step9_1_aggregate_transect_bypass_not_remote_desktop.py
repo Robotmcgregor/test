@@ -89,7 +89,7 @@ def search_html_files_fn(directory_odk, site):
     # create an empty list
     html_list = []
     print(site)
-    #todo have changed the html file names
+
     for file in glob.glob(directory_odk + '//' + site + '_transect?.html'):
         # append file paths to list
         html_list.append(file)

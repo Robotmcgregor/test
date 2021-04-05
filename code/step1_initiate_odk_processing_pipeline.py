@@ -142,7 +142,7 @@ def odk_export_csv_checker_fn(dir_path, located_list, search_criteria, temp_dir,
     if not os.path.exists(file_path):
         print(search_criteria, ' not located.')
         df = pd.DataFrame()
-        located = False  # todo remove this variable?
+        located = False
     else:
         print(search_criteria, ' located, initiating script..........')
         # call the import_script_fn function.

@@ -21,6 +21,7 @@ SOFTWARE.
 # Import modules
 import pandas as pd
 import warnings
+import numpy as np
 from datetime import datetime
 
 warnings.filterwarnings("ignore")
@@ -171,6 +172,7 @@ def site_hor_list_variable_fn(ras):
     ras_hort_list1234567891011121314 = [
         ras_hor_list1, ras_hor_list2, ras_hor_list3, ras_hor_list4, ras_hor_list5, ras_hor_list6, cover_list,
         basal_list, density_list, erodible_soil, pas_ulil_list, weeds_comment_list, final_feral_list, condition_list]
+    print('ras_hort_list1234567891011121314: ', ras_hort_list1234567891011121314)
     return ras_hort_list1234567891011121314
 
 
@@ -199,9 +201,9 @@ def site_vert_list_variable_fn(ras):
     south_fire_list = [ras.south_ff[0], ras.south_fi[0]]
 
     ras_vert_list123456789101112 = [
-        ras_ver_list1, ras_ver_list2, ras_ver_list3, ras_ver_list4, min_max_list, ras_ver_list5, ras_ver_list6, \
+        ras_ver_list1, ras_ver_list2, ras_ver_list3, ras_ver_list4, min_max_list, ras_ver_list5, ras_ver_list6,
         erod_severity_list, erod_stability_list, erosion_comment_list, north_fire_list, south_fire_list]
-
+    print('ras_vert_list123456789101112: ', ras_vert_list123456789101112)
     return ras_vert_list123456789101112
 
 
