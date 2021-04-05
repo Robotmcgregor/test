@@ -167,7 +167,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
         if os.path.isfile(star_csv):
             print('clean_star_transect.csv exists.')
             import step8_2_site_star_data_extraction
-            estab_vert_list13, visit_vert_list1, ground_vert_list12345, estimates_hor_list12345, estimates_veg_list\
+            estab_vert_list13, visit_vert_list1, ground_vert_list12345, estimates_hor_list12345, estimates_veg_list \
                 = step8_2_site_star_data_extraction.main_routine(star_csv, site, site_dir, shrub_list_excel)
 
         else:
@@ -178,9 +178,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
 
             visit_ver_list1 = []
 
-
             cond_hor_list1 = []
-
 
         basalCsv = os.path.join(site_dir, site + '_clean_basal.csv')
         print(basalCsv)
@@ -209,7 +207,6 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
 
         else:
             woody_vert_list12345678910 = [[], [], [], [], [], [], [], [], [], []]
-
 
         # TODO turn this field back on when back at the office
         """
@@ -240,46 +237,19 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
             print('Ras.csv exists.')
             # run stepX_ras_basic.
             import step8_5_site_ras_data_extraction
-            ras_hor_list1, ras_hor_list2, ras_hor_list3, ras_hor_list4, ras_hor_list5, ras_hor_list6, cover_list, basal_list, \
-            density_list, ras_ver_list1, erodible_soil, pas_ulil_list, weeds_comment_list, feral_list, condition_list, \
-            ras_ver_list2, ras_ver_list3, ras_ver_list4, min_max_list, ras_ver_list5, ras_ver_list6, erod_severity_list, \
-            erod_stability_list, erosion_comment_list, north_fire_list, south_fire_list = \
-                step8_5_site_ras_data_extraction.main_routine(ras_csv, site, site_dir)
+            ras_hort_list1234567891011121314, ras_vert_list123456789101112 = step8_5_site_ras_data_extraction.main_routine(
+                ras_csv, site, site_dir)
 
 
 
 
         else:
-            ras_hor_list1 = []
-            ras_hor_list2 = []
-            ras_hor_list3 = []
-            ras_hor_list4 = []
-            ras_hor_list5 = []
-            ras_hor_list6 = []
-            cover_list = []
-            basal_list = []
-            density_list = []
-            erodible_soil = []
-            pas_ulil_list = []
-            weeds_comment_list = []
-            feral_list = []
-            condition_list = []
-            ras_ver_list1 = []
-            ras_ver_list2 = []
-            ras_ver_list3 = []
-            ras_ver_list4 = []
-            min_max_list = []
-            ras_ver_list5 = []
-            ras_ver_list6 = []
-            erod_severity_list = []
-            erod_stability_list = []
-            erosion_comment_list = []
-            north_fire_list = []
-            south_fire_list = []
+            ras_hort_list1234567891011121314 = [[], [], [], [], [], [], [], [], [], [], [], [], [], []]
+            ras_vert_list123456789101112 = [[], [], [], [], [], [], [], [], [], [], [], []]
 
         # Sort observation sheet data into page items.
         establish_data_list = [estab_vert_list13[0], establish_list2456[0], estab_vert_list13[1], establish_list2456[1],
-                             establish_list2456[2], establish_list2456[3]]
+                               establish_list2456[2], establish_list2456[3]]
 
         visit_data_list = [visit_vert_list1, visit_vert_list2]
 
@@ -304,16 +274,32 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
 
         condition_data_list = [cond_vert_list12[0], cond_hor_list1, cond_vert_list12[1]]
 
-        ras_data_list = [ras_hor_list1, ras_hor_list2, ras_hor_list3, ras_hor_list4, ras_hor_list5, ras_hor_list6,
-                         cover_list, ras_ver_list1,
-                         ras_ver_list2, ras_ver_list3, ras_ver_list4, min_max_list, basal_list, density_list,
-                         ras_ver_list5, ras_ver_list6, erodible_soil, erod_severity_list, erod_stability_list,
-                         erosion_comment_list,
-                         pas_ulil_list, weeds_comment_list, feral_list, ['DO THIS'], north_fire_list, south_fire_list,
-                         condition_list]
+        ras_data_list = [ras_hort_list1234567891011121314[0], ras_hort_list1234567891011121314[1],
+                         ras_hort_list1234567891011121314[2], ras_hort_list1234567891011121314[3],
+                         ras_hort_list1234567891011121314[4], ras_hort_list1234567891011121314[5],
+                         ras_hort_list1234567891011121314[6],
+                         ras_hort_list1234567891011121314[7],
+                         ras_hort_list1234567891011121314[8],
+                         ras_hort_list1234567891011121314[9],
+                         ras_vert_list123456789101112[0],
+                         ras_hort_list1234567891011121314[10],
+                         ras_hort_list1234567891011121314[11],
+                         ras_hort_list1234567891011121314[12],
+                         ras_hort_list1234567891011121314[13],
+                         ras_vert_list123456789101112[1],
+                         ras_vert_list123456789101112[2],
+                         ras_vert_list123456789101112[3],
+                         ras_vert_list123456789101112[4],
+                         ras_vert_list123456789101112[5],
+                         ras_vert_list123456789101112[6],
+                         ras_vert_list123456789101112[7],
+                         ras_vert_list123456789101112[8],
+                         ras_vert_list123456789101112[9],
+                         ras_vert_list123456789101112[10],
+                         ras_vert_list123456789101112[11]]
 
-        obsDataList = [establish_data_list, visit_data_list, disturbance_data_list, basal_data_list, woody_data_list,
-                       ground_data_list, estimates_data_list, estimates_veg_data_list, condition_data_list]
+        obs_data_list = [establish_data_list, visit_data_list, disturbance_data_list, basal_data_list, woody_data_list,
+                         ground_data_list, estimates_data_list, estimates_veg_data_list, condition_data_list]
 
         # create paths to the required sit csv files
 
@@ -328,7 +314,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
                 # call the step9_2_aggregate_transect_extraction_remote_desktop.py script.
                 import step9_2_aggregate_transect_extraction_remote_desktop
                 step9_2_aggregate_transect_extraction_remote_desktop.main_routine(
-                    obsDataList, ras_data_list, site, site_dir, star)
+                    obs_data_list, ras_data_list, site, site_dir, star)
 
             elif os.path.isfile(ras_csv):
                 ras = pd.read_csv(ras_csv).fillna('BLANK').replace('Nan', 'BLANK')
@@ -352,7 +338,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
                 print('step9_1_aggregate_transect_bypass_not_remote_desktop.py initiating..........')
                 # call the step9_1_aggregate_transect_bypass_not_remote_desktop.py script.
                 import step9_1_aggregate_transect_bypass_not_remote_desktop
-                step9_1_aggregate_transect_bypass_not_remote_desktop.main_routine(directory_odk, obsDataList,
+                step9_1_aggregate_transect_bypass_not_remote_desktop.main_routine(directory_odk, obs_data_list,
                                                                                   ras_data_list,
                                                                                   site, site_dir, star)
             elif os.path.isfile(ras_csv):
@@ -363,7 +349,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
                 step11_1_site_ras_processing_workflow.main_routine(
                     ras_data_list, site, site_dir, ras)
 
-    return obsDataList, ras_data_list, site, site_dir, star_csv
+    return obs_data_list, ras_data_list, site, site_dir, star_csv
 
 
 """ ---------------------------------------------------------------------------------------------"""

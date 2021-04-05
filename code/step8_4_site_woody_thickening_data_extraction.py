@@ -52,8 +52,8 @@ def woody_list_vertical_fn(woody):
     woody_ver_list10 = [woody.bot_sb1[0], woody.bot_sb2[0], woody.bot_sb3[0], woody.bot_sb4[0],
                         woody.bot_sb5[0]]
 
-    woody_vert_list12345678910 = woody_ver_list1, woody_ver_list2, woody_ver_list3, woody_ver_list4, woody_ver_list5, \
-                            woody_ver_list6, woody_ver_list7, woody_ver_list8, woody_ver_list9, woody_ver_list10
+    woody_vert_list12345678910 = [woody_ver_list1, woody_ver_list2, woody_ver_list3, woody_ver_list4, woody_ver_list5,
+                                  woody_ver_list6, woody_ver_list7, woody_ver_list8, woody_ver_list9, woody_ver_list10]
     return woody_vert_list12345678910
 
 
@@ -127,6 +127,9 @@ def main_routine(woody_csv, site, site_dir, shrub_list_excel):
 
     # extend the woody_species_list1 containing all tree and shrub species and replace the list at woodyVerList[1]
     woody_species_list1.extend(woody_species_list2)
+    print('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[')
+    print(woody_species_list1)
+    print(type(woody_vert_list12345678910))
 
     # replace list position 1 in the woodyVerList list of lists.
     woody_vert_list12345678910[8] = woody_species_list1

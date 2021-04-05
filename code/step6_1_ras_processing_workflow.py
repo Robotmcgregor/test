@@ -302,7 +302,7 @@ def main_routine(file_path, temp_dir, veg_list_excel):
     ras_df = pd.DataFrame(final_ras_list)
 
     ras_df.columns = [
-        'site', 'date', 'date_time ', 'recorder', 'district', 'prop', 'unlist_prop', 'gps', 'c_lat',
+        'site', 'date', 'date_time', 'recorder', 'district', 'prop', 'unlist_prop', 'gps', 'c_lat',
         'c_lon', 'c_acc', 'desc', 'erod_soil', 'bare_soil', 'land_system',
         'ls_consist',
         'ls_alt', 'ls_source', 'water_point', 'water_name', 'water_dir', 'water_dist', 'camel', 'rabbit',
@@ -320,7 +320,9 @@ def main_routine(file_path, temp_dir, veg_list_excel):
 
     #todo ras need to have prop code call in the estade shapefile and concatinate it to the begining of the ras number
 
-    csv_output = (temp_dir + '\\clean_ras.csv')
+    """ras_df['final_prop'] = ras_df['prop'].fillna(ras_df['unlist_prop'])
+    csv_output = (temp_dir + '\\clean_ras.csv')"""
+
     ras_df.to_csv(csv_output)
 
     print('------------------------------------------------------------')

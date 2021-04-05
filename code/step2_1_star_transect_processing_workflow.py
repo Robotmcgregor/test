@@ -148,11 +148,8 @@ def location_fn(row):
             'NP_property_outside' or 'NP_prop_new':
 
         listed_property = np.nan
-        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))
+        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))#todo property name not working
 
-    else:
-        listed_property = string_clean_title_fn(str(row['PROP:PROPERTY']))  # todo property not functioning properly
-        unlisted_property = np.nan
 
     site1 = str(row['GROUP_SITE:SITE_FINAL'])
 
