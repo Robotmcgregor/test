@@ -197,30 +197,19 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
             basal_hor_list1234 = [[], [], [], []]
             basal_vert_list123 = [[], [], []]
 
-        woodyCsv = os.path.join(site_dir, site + '_clean_woody_thick.csv')
+        woody_csv = os.path.join(site_dir, site + '_clean_woody_thick.csv')
         # print(woody_csv)
-        if os.path.isfile(woodyCsv):
+        if os.path.isfile(woody_csv):
 
             print('clean_woody_thick.csv exists.')
             # run cleanIntData.
             import step8_4_site_woody_thickening_data_extraction
-            woodyVerList1, woodyVerList2, woodyVerList3, woodyVerList4, woodyVerList5, woodyVerList6, \
-            woodyVerList7, woodyVerList8, woodyVerList9, woodyVerList10 = \
-                step8_4_site_woody_thickening_data_extraction.main_routine(woodyCsv, site, site_dir, shrub_list_excel)
-            # print('woodyVerList: ', woodyVerList)
+            woody_vert_list12345678910 = step8_4_site_woody_thickening_data_extraction.main_routine(
+                woody_csv, site, site_dir, shrub_list_excel)
 
         else:
+            woody_vert_list12345678910 = [[], [], [], [], [], [], [], [], [], []]
 
-            woodyVerList1 = []
-            woodyVerList2 = []
-            woodyVerList3 = []
-            woodyVerList4 = []
-            woodyVerList5 = []
-            woodyVerList6 = []
-            woodyVerList7 = []
-            woodyVerList8 = []
-            woodyVerList9 = []
-            woodyVerList10 = []
 
         # TODO turn this field back on when back at the office
         """
@@ -305,8 +294,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
                           basal_vert_list123[0], basal_vert_list123[1], basal_vert_list123[2]
 
         print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$', basal_data_list)
-        woody_data_list = [woodyVerList1, woodyVerList2, woodyVerList3, woodyVerList4, woodyVerList5, woodyVerList6,
-                         woodyVerList7, woodyVerList8, woodyVerList9, woodyVerList10]
+        woody_data_list = woody_vert_list12345678910
 
         ground_data_list = ground_vert_list12345
 

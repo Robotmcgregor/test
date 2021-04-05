@@ -25,17 +25,18 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
+
 def species_list_fn(df, n, m):  # todo this is the botanical and cover functions.
     """ Create a list from the required (n) botanical name fields from the dataframe (df), loops through ten
         times(number of variables).
             :param df: pandas data frame object.
-            :param n: string object passed into the function (i.e. 'PG', 'AG').
+            :param n: string object passed into the function (i.e. 'tree_live', 'tree_dead').
+            :param m: string object passed into the function (i.e. 'shrub_live', 'shrub_dead').
             :return botanical_list: list object containing ten botanical names."""
 
     botanical_list = []
 
     for i in range(7):
-
         species1 = df[n + str(i + 1)][0]
         species2 = df[m + str(i + 1)][0]
 
@@ -47,9 +48,10 @@ def species_list_fn(df, n, m):  # todo this is the botanical and cover functions
 
 def basal_list_horizontal_fn(basal):
     """ Extract basal observation sheet variables as a list of lists.
-    :param basal: pandas dataframe object.
-    :return basal_hor_list1234: list object containing basal information to be inserted into the observation sheet
-    vertically, including factor, basal species and count information. """
+
+            :param basal: pandas dataframe object.
+            :return basal_hor_list1234: list object containing basal information to be inserted into the observation sheet
+            horizontally, including factor, basal species and count information. """
 
     basal_hor_list1 = [basal.basal1[0], basal.basal2[0], basal.basal3[0], basal.basal4[0], basal.basal5[0],
                        basal.basal6[0], basal.basal7[0]]
@@ -66,6 +68,12 @@ def basal_list_horizontal_fn(basal):
 
 
 def basal_list_vertical_fn(basal):
+    """ Extract basal observation sheet variables as a list of lists.
+
+            :param basal: pandas dataframe object.
+            :return basal_vert_list123: list object containing basal information to be inserted into the observation
+            sheet vertically, including species lists and basal species per ha values. """
+
     basal_ver_list1 = [int(basal.basal_tree[0]), int(basal.basal_shrub[0]), int(basal.total_basal[0])]
 
     basal_ver_list2 = [basal.bot_ts1[0], basal.bot_ts2[0], basal.bot_ts3[0], basal.bot_ts4[0],
@@ -79,7 +87,13 @@ def basal_list_vertical_fn(basal):
 
 
 def common_name_extraction_fn(botanical_series, target_list, form):
-    """ Extract the common name from the botanical_common_series excel document """
+    """ Extract the common name from the botanical_common_series excel document.
+
+            :param botanical_series: pandas series object containing common and botanical species names.
+            :param target_list: List of botanical species defined under basal_list_vertical_fn.
+            :param form: string object passed into the function (tree or shrub).
+            :return species_list: list object containing list elements [botanical_name, common_name].
+            :return form_list: list object containing the form identifier of each species. """
 
     species_list = []
     form_list = []
@@ -100,16 +114,25 @@ def common_name_extraction_fn(botanical_series, target_list, form):
     return species_list, form_list
 
 
-
 def main_routine(basal_csv, site, site_dir, shrub_list_excel):
+
+    """ Extract variables from the current site basal data frame and return ordered lists for observational
+    workbook insertion.
+
+            :param basal_csv: sting object containing the file path to the current site basal csv file.
+            :param site: string object containing the current site.
+            :param site_dir: string object containing the path to the site directory.
+            :param shrub_list_excel: string object containing the path to an excel document containing botanical and
+                common names.
+            :return basal_hor_list1234: list object containing basal information to be inserted into the observation
+            sheet horizontally, including factor, basal species and count information.
+            :return basal_vert_list123: list object containing basal information to be inserted into the observation
+                sheet vertically, including species lists and basal species per ha values. """
+
     print('step8_3_site_basal_sweep_data_extraction.py INITIATED.')
 
     basal = pd.read_csv(basal_csv).fillna('BLANK').replace('Nan', 'BLANK')
-    # globDir(site_folder_path, '\\*cleanBasal.csv')
 
-    veg_csv = pd.read_excel(shrub_list_excel)
-
-    veg_list = pd.read_excel(shrub_list_excel)
     shrub_df = pd.read_excel(shrub_list_excel, sheet_name='CompleteTree')
     # filter out unwanted fields.
     tree_series = shrub_df[['copyBotanical2', 'copyCommon']]
@@ -138,6 +161,7 @@ def main_routine(basal_csv, site, site_dir, shrub_list_excel):
 
     # extend formList1 with formList2
     basal_ver_list4.extend(basal_ver_list5)
+
     # replace basalVerList[2] with formList1
     basal_vert_list123[2] = basal_ver_list4
 

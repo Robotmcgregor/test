@@ -98,6 +98,7 @@ def site_establishment_fn(star):
 
 def ground_composition_ver_list_fn(star):
     """ Collect the ground layer composite data and preform fractononl calculations.
+
      :param star: pandaas data frame object.
      :return ground_vert_list12345: list object containing list elements of ground cover fractions ready for observation
       sheet insertion. """
@@ -165,6 +166,7 @@ def site_cover_estimates_fn(star):
 def species_list_fn(df, n):  # todo this is the botanical and cover functions.
     """ Create a list from the required (n) botanical name fields from the dataframe (df), loops through ten
         times(number of variables).
+
             :param df: pandas data frame object.
             :param n: string object passed into the function (i.e. 'PG', 'AG').
             :return botanical_list: list object containing ten botanical names."""
@@ -181,6 +183,7 @@ def species_list_fn(df, n):  # todo this is the botanical and cover functions.
 def cover_list_fn(df, n):
     """ create a list from the required (n) cover fields from the DataFrame (df), loops through ten
         times(number of variables).
+
             :param df: pandas data frame object.
             :param n: string object passed into the function (i.e. 'PG', 'AG').
             :return cover_list: list object containing ten cover values names."""
@@ -208,6 +211,7 @@ def remove_list_values_fn(list1, search_criteria):
 
 def reverse_order_lists_and_clean_species_list_fn(species):
     """ Reverse the species list.
+
             :param species: list object containing species names and 'BLANK list elements.
             :return output_list: list object containing the elements of the species list in reverse order."""
 
@@ -225,6 +229,7 @@ def reverse_order_lists_and_clean_species_list_fn(species):
 
 def reverse_order_lists_and_clean_cover_list(cover):
     """ reverse the count list and convert to int.
+
             :param cover: list object containing cover value list elements.
             :return output_list: list object containing the elements of the cover list in reverse order."""
 
@@ -241,6 +246,7 @@ def reverse_order_lists_and_clean_cover_list(cover):
 
 def split_list_fn(list1, n):
     """ split a list into maximum length (n).
+
             :param list1: input list object.
             :param n: integer object passed through the function defining the maximum values in the primary list.
             :return primary_list: list object containing the n number of variables form list1.
@@ -261,6 +267,7 @@ def split_list_fn(list1, n):
 
 def sum_list_fn(list1):
     """ Calculate the sum of list elements.
+
             :param list1:" input list of numeric variables.
             :return total: integer object containing the total value of summed values from the list1 object. """
 
