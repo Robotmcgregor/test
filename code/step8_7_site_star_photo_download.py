@@ -19,9 +19,7 @@ SOFTWARE.
 """
 
 # Import modules
-# from __future__ import print_function, division
 import pandas as pd
-import glob
 import warnings
 import urllib
 
@@ -31,14 +29,14 @@ warnings.filterwarnings("ignore")
 def photos_fn(df, site):
     """ extract the seven photograph urls"""
 
-    photo_off = df.photo_off[0]
-    photo_c = df.photo_c[0]
-    photo_n = df.photo_n[0]
-    photo_ne = df.photo_ne[0]
-    photo_se = df.photo_se[0]
-    photo_s = df.photo_s[0]
-    photo_sw = df.photo_sw[0]
-    photo_nw = df.photo_nw[0]
+    photo_off = df.photo_off.iloc[0]
+    photo_c = df.photo_c.iloc[0]
+    photo_n = df.photo_n.iloc[0]
+    photo_ne = df.photo_ne.iloc[0]
+    photo_se = df.photo_se.iloc[0]
+    photo_s = df.photo_s.iloc[0]
+    photo_sw = df.photo_sw.iloc[0]
+    photo_nw = df.photo_nw.iloc[0]
 
     photo_list = [photo_off, photo_c, photo_n, photo_ne, photo_se, photo_s, photo_sw, photo_nw]
 

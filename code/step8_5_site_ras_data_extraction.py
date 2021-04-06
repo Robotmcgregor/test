@@ -142,11 +142,7 @@ def site_hor_list_variable_fn(ras):
             :return ras_hort_list1234567891011121314: list object containing information to be inserted into the
             ras sheet horizontally, including site name, water points, basal density feral animals etc. """
 
-    if ras.prop[0] == 'BLANK':
-        prop = ras.prop[0].replace('BLANK', ras.unlist_prop[0])
-        print(prop, ' replaced with unlisted_prop')
-
-    ras_hor_list1 = [prop, ras.site[0], ras.date_time[0]]
+    ras_hor_list1 = [ras.final_prop[0], ras.site[0], ras.date_time[0]]
     ras_hor_list2 = [ras.recorder[0], 'BLANK', 'BLANK']
     ras_hor_list3 = [ras.c_lat[0], ras.c_lon[0], 'PADDOCK_not_collected']
     ras_hor_list4 = [ras.water_name[0], ras.water_point[0], ras.water_dist[0], ras.water_dir[0]]
@@ -268,6 +264,8 @@ def main_routine(ras_csv, site, site_dir):
     # replace the weed comment with the final weed comment.
     ras_hort_list1234567891011121314[12] = [weeds_comment]
 
+    print('step8_5_site_ras_data_extraction.py COMPLETED')
+
     return ras_hort_list1234567891011121314, ras_vert_list123456789101112
 
     """ras_hor_list1, ras_hor_list2, ras_hor_list3, ras_hor_list4, ras_hor_list5, ras_hor_list6, cover_list, basal_list, \
@@ -275,7 +273,7 @@ def main_routine(ras_csv, site, site_dir):
            ras_ver_list2, ras_ver_list3, ras_ver_list4, min_max_list, ras_ver_list5, ras_ver_list6, erod_severity_list, \
            erod_stability_list, erosion_comment_list, north_fire_list, south_fire_list"""
 
-    print('step8_5_site_ras_data_extraction.py COMPLETED')
+
 
 
 if __name__ == '__main__':

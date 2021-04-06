@@ -110,7 +110,7 @@ def move_html_files(html_list, site, site_dir):
     return ()
 
 
-def main_routine(directory_odk, obs_data_list, ras_data_list, site, site_dir, star):
+def main_routine(directory_odk, obs_data_list, site, site_dir, star):
     """Extract the URL's contained within the Star Transect ODK Aggregate .csv for the star transect repeats (transects).
     Open and log into ODK Aggregate using the testodk username and password,
     navigate and open the transect tables, and download the table data as a .html so that it can be imported as a Pandas DataFrame in the following script.
@@ -127,7 +127,7 @@ def main_routine(directory_odk, obs_data_list, ras_data_list, site, site_dir, st
 
     # call the step10_1_site_observation_sheet_processing_workflow.py script.
     import step10_1_site_observation_sheet_processing_workflow
-    step10_1_site_observation_sheet_processing_workflow.main_routine(obs_data_list, ras_data_list, site, site_dir, star)
+    step10_1_site_observation_sheet_processing_workflow.main_routine(obs_data_list, site, site_dir, star)
 
     # chrome_driver = r"Z:\Scratch\Rob\chrome\chromedriver.exe"
     # call the odk_aggregate_log_in_fn function.

@@ -29,6 +29,7 @@ SOFTWARE.
 
 def create_worksheet_fn(workbook, worksheet_name):
     """ Create worksheet and set row height.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet_name: string object containing worksheet name."""
 
@@ -43,6 +44,7 @@ def create_worksheet_fn(workbook, worksheet_name):
 
 def insert_sheet_headings_fn(workbook, worksheet, heading2, heading3, heading4, heading6, color_fill):
     """ Add item headings to cells as strings.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading2: workbook style derived  from define heading2_fn.
@@ -100,6 +102,7 @@ def insert_sheet_headings_fn(workbook, worksheet, heading2, heading3, heading4, 
 
 def insert_blank_formatted_cells_fn(workbook, worksheet, heading7):
     """ Add blank formatted cells to worksheet.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading7: workbook style derived  from define heading7_fn.
@@ -197,7 +200,8 @@ def insert_blank_formatted_cells_fn(workbook, worksheet, heading7):
 
 def merge_cells_fn(workbook, worksheet, heading1, heading2, heading4, heading7, color_fill):
     """ Add item headings to cells and merge.
-            :param color_fill:
+
+            :param color_fill: workbook style derived  from define colour_fill_fn.
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading1: workbook style derived  from define heading1_fn.
@@ -244,6 +248,7 @@ def merge_cells_fn(workbook, worksheet, heading1, heading2, heading4, heading7, 
 
 def define_column_widths_fn(workbook, worksheet):
     """ define and set column widths.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :return: workbook: updated workbook object.
@@ -261,6 +266,7 @@ def define_column_widths_fn(workbook, worksheet):
 
 def insert_default_values_fn(workbook, worksheet, heading7):
     """ Add default values and  format worksheet cells.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading7: workbook style derived  from define heading7_fn.
@@ -305,49 +311,46 @@ def insert_default_values_fn(workbook, worksheet, heading7):
 
 
 def insert_botanical_common_names_fn(item, row, col, insert_horizontal_data_fn, worksheet, heading7):
-    """ loop through the botanical and common name lists and insert into the workbook
-    :param item:
-    :param row:
-    :param col:
-    :param insert_horizontal_data_fn:
-    :param worksheet:
-    :param heading7:
-    :return:
-    """
+    """ loop through the botanical and common name lists and insert into the workbook.
+
+            :param item: list object containing the input data.
+            :param row: integer object containing the starting row value for data insertion.
+            :param col: integer object containing the starting column value for data insertion.
+            :param insert_horizontal_data_fn: function controlling horizontal data insertion.
+            :param worksheet: current worksheet of the workbook (cover estimates).
+            :param heading7: workbook heading style. """
 
     if item:
 
         # ---------------------------------------- Woody species ----------------------------------------------
 
-        # print('BASAL VERTICAL LIST: ', item)
         row = row
         col = col
         for i in item:
-            # print(i)
             # call the insert_vertical_data_fn function
             insert_horizontal_data_fn(worksheet, row, col, i, heading7, 1)
             # print('entered: ', i, row)
             row += 1
-    return ()
 
 
 def main_routine(color_fill, heading1, heading2, heading3, heading4, heading6, heading7, workbook, obs_data_list,
                  insert_vertical_data_fn, insert_horizontal_data_fn):
-    """
+    """ Create the Cover estimates worksheet within the Rangeland Monitoring observation excel workbook.
 
-    :param color_fill:
-    :param heading1:
-    :param heading2:
-    :param heading3:
-    :param heading4:
-    :param heading6:
-    :param heading7:
-    :param workbook:
-    :param obs_data_list:
-    :param insert_vertical_data_fn:
-    :param insert_horizontal_data_fn:
-    """
+            :param color_fill: workbook style derived  from define colour_fill_fn.
+            :param heading1: workbook style derived  from define heading1_fn.
+            :param heading2: workbook style derived  from define heading2_fn.
+            :param heading3: workbook style derived  from define heading3_fn.
+            :param heading4: workbook style derived  from define heading4_fn.
+            :param heading6: workbook style derived  from define heading6_fn.
+            :param heading7: workbook style derived  from define heading7_fn.
+            :param workbook: open workbook object derived from create_workbook_fn function.
+            :param obs_data_list: list object with list elements containing input data for the entire workbook.
+            :param insert_vertical_data_fn: function controlling a vertical data insertion loop.
+            :param insert_horizontal_data_fn: function controlling a horizontal data insertion loop. """
+
     print('step10_10_create_site_cover_estimates.py INITIATED')
+
     work_sheet_name = 'Step 7 - Cover estimates  - Tab'
 
     # call the create_worksheet_fn function.

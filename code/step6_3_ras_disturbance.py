@@ -46,7 +46,7 @@ def pres_abs_disturbance_fn(dist_class_list):
     """ assign present or absent to the respective disturbance features.
 
             :param dist_class_list: ordered list object that was matched from ordered_list variables within the
-            dist_list of three variables, created by the clearing_cyclone_dieback_fn function.
+            photo_list of three variables, created by the clearing_cyclone_dieback_fn function.
             :return: dist_pa_list ordered list object derived from dist_class_object with matched variables
             (match -> str(Present)),  (no match - str(Absent)). """
 

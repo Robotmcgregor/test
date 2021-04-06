@@ -119,7 +119,7 @@ def main_routine(obs_data_list, ras_data_list, site, site_dir, star):
 
     # call the step10_1_site_observation_sheet_processing_workflow.py script.
     import step10_1_site_observation_sheet_processing_workflow
-    step10_1_site_observation_sheet_processing_workflow.main_routine(obs_data_list, ras_data_list, site, site_dir, star)
+    step10_1_site_observation_sheet_processing_workflow.main_routine(obs_data_list, site, site_dir, star)
 
 
 if __name__ == "__main__":

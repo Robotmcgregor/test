@@ -23,12 +23,12 @@ SOFTWARE.
 import xlsxwriter
 
 
-
 def create_workbook_fn(site_dir, site):
     """Create an empty excel workbook.
-    :param site_dir: sting object containing the path to the working site folder.
-    :param site: string object containing the site name.
-    :return: workbook: empty workbook object created in the site_dir directory ready for data insertion."""
+
+            :param site_dir: sting object containing the path to the working site folder.
+            :param site: string object containing the site name.
+            :return: workbook: empty workbook object created in the site_dir directory ready for data insertion."""
 
     workbook = xlsxwriter.Workbook(site_dir + '//' + site + '.xlsx')
 
@@ -37,8 +37,9 @@ def create_workbook_fn(site_dir, site):
 
 def define_heading1(workbook):
     """ Define heading1 formatting.
-        :param workbook: workbook object created in the create_workbook_fn function.
-        :return heading1: workbook heading style."""
+
+            :param workbook: workbook object created in the create_workbook_fn function.
+            :return heading1: workbook heading style."""
 
     heading1 = workbook.add_format()
     heading1.set_font_name('Calibri')
@@ -56,8 +57,9 @@ def define_heading1(workbook):
 
 def define_heading2(workbook):
     """ Define heading2 formatting.
-        :param workbook: workbook object created in the create_workbook_fn function.
-        :return heading2: workbook heading style."""
+
+            :param workbook: workbook object created in the create_workbook_fn function.
+            :return heading2: workbook heading style."""
 
     heading2 = workbook.add_format()
     heading2.set_font_name('Calibri')
@@ -75,8 +77,9 @@ def define_heading2(workbook):
 
 def define_heading3(workbook):
     """ Define heading3 formatting.
-        :param workbook: workbook object created in the create_workbook_fn function.
-        :return heading3: workbook heading style."""
+
+            :param workbook: workbook object created in the create_workbook_fn function.
+            :return heading3: workbook heading style."""
 
     heading3 = workbook.add_format()
     heading3.set_font_name('Calibri')
@@ -94,8 +97,9 @@ def define_heading3(workbook):
 
 def define_heading4(workbook):
     """ Define heading4 formatting.
-        :param workbook: workbook object created in the create_workbook_fn function.
-        :return heading4: workbook heading style."""
+
+            :param workbook: workbook object created in the create_workbook_fn function.
+            :return heading4: workbook heading style."""
 
     heading4 = workbook.add_format()
     heading4.set_font_name('Calibri')
@@ -113,8 +117,9 @@ def define_heading4(workbook):
 
 def define_heading5(workbook):
     """ Define heading5 formatting.
-        :param workbook: workbook object created in the create_workbook_fn function.
-        :return heading5: workbook heading style."""
+
+            :param workbook: workbook object created in the create_workbook_fn function.
+            :return heading5: workbook heading style."""
 
     heading5 = workbook.add_format()
     heading5.set_font_name('Calibri')
@@ -132,8 +137,9 @@ def define_heading5(workbook):
 
 def define_heading6(workbook):
     """ Define heading6 formatting.
-        :param workbook: workbook object created in the create_workbook_fn function.
-        :return heading6: workbook heading style."""
+
+            :param workbook: workbook object created in the create_workbook_fn function.
+            :return heading6: workbook heading style."""
 
     heading6 = workbook.add_format()
     heading6.set_font_name('Calibri')
@@ -150,8 +156,9 @@ def define_heading6(workbook):
 
 def define_heading7(workbook):
     """ Define heading7 formatting.
-        :param workbook: workbook object created in the create_workbook_fn function.
-        :return heading7: workbook heading style."""
+
+            :param workbook: workbook object created in the create_workbook_fn function.
+            :return heading7: workbook heading style."""
 
     heading7 = workbook.add_format()
     heading7.set_font_name('Calibri')
@@ -167,8 +174,9 @@ def define_heading7(workbook):
 
 def define_heading8(workbook):
     """ Define heading8 formatting.
-        :param workbook: workbook object created in the create_workbook_fn function.
-        :return heading8: workbook heading style."""
+
+            :param workbook: workbook object created in the create_workbook_fn function.
+            :return heading8: workbook heading style."""
 
     heading8 = workbook.add_format()
     heading8.set_font_name('Calibri')
@@ -185,8 +193,9 @@ def define_heading8(workbook):
 
 def define_color_fill(workbook):
     """ Define heading3 formatting.
-        :param workbook: workbook object created in the create_workbook_fn function.
-        :return colour_fill: workbook cell fill style."""
+
+            :param workbook: workbook object created in the create_workbook_fn function.
+            :return colour_fill: workbook cell fill style."""
 
     color_fill = workbook.add_format()
     color_fill.set_bg_color('#fcbd00')
@@ -197,11 +206,20 @@ def define_color_fill(workbook):
 
 
 def main_routine(site, site_dir):
-    """
-    :param site:
-    :param site_dir:
-    :return:
-    """
+    """Create a workbook and format cells for the Rangeland Monitoring observation excel workbook.
+
+            :param site: string object containing the site name.
+            :param site_dir: string object containing the path to the current site directory.
+            :return color_fill: workbook style derived  from define colour_fill_fn.
+            :return heading1: workbook style derived  from define heading1_fn.
+            :return heading2: workbook style derived  from define heading2_fn.
+            :return heading3: workbook style derived  from define heading3_fn.
+            :return heading4: workbook style derived  from define heading4_fn.
+            :return heading5: workbook style derived  from define heading5_fn.
+            :return  heading6: workbook style derived  from define heading6_fn.
+            :return  heading7: workbook style derived  from define heading7_fn.
+            :return workbook: open workbook object derived from create_workbook_fn function.  """
+
     print('step10_2_observation_sheet_formatting.py INITIATED.')
 
     # call the create_workbook_fn function.
@@ -237,7 +255,6 @@ def main_routine(site, site_dir):
     print('step22_createSiteEstablishmentSheet3P.py initiating..........')
 
     return color_fill, heading1, heading2, heading3, heading4, heading5, heading6, heading7, heading8, workbook
-
 
 
 if __name__ == '__main__':

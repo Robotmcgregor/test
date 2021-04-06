@@ -25,14 +25,14 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-def photo_url_fn(row, site):
+def photo_url_fn(row, site_code):
     """ extract site photo url string and bearings.
 
         :param row: pandas dataframe row value object.
         :param site: string variable containing the site name.
         :return photo_list: list object containing the disturbance category, photo url and bearing information."""
 
-    photo_list = [site]
+    photo_list = [site_code]
     if str(row['GPS_SELECT']) == 'now_gps' or str(row['GPS_SELECT']) == 'now_device':
 
         for i in range(3):
@@ -72,7 +72,7 @@ def erosion_photo_url_fn(row):
     return photo_list
 
 
-def main_routine(clean_list, row, site):
+def main_routine(clean_list, row, site_code):
     """ Extract the disturbance photo urls.
 
             :param clean_list: list object containing processed variables.
@@ -84,7 +84,7 @@ def main_routine(clean_list, row, site):
     print('step_22_ras_photos_pipeline.py INITIATED.')
 
     # call photos function
-    photo_url_list = photo_url_fn(row, site)
+    photo_url_list = photo_url_fn(row, site_code)
 
     erosion_photo_url_list = erosion_photo_url_fn(row)
     # extend results to the photo_url_list

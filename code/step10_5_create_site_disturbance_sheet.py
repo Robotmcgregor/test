@@ -24,6 +24,7 @@ import os
 
 def create_worksheet_fn(workbook, worksheet_name):
     """ Create worksheet and set row height.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet_name: string object containing worksheet name.
             :return: workbook: updated workbook object.
@@ -40,6 +41,7 @@ def create_worksheet_fn(workbook, worksheet_name):
 
 def insert_sheet_headings(workbook, worksheet, heading2, heading3, heading4, heading5, color_fill):
     """ Add item headings to cells as strings.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading2: workbook style derived  from define heading2_fn.
@@ -93,6 +95,7 @@ def insert_sheet_headings(workbook, worksheet, heading2, heading3, heading4, hea
 
 def insert_blank_formatted_cells_fn(workbook, worksheet, heading7):
     """ Add blank formatted cells to worksheet.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading7: workbook style derived  from define heading7_fn.
@@ -119,6 +122,7 @@ def insert_blank_formatted_cells_fn(workbook, worksheet, heading7):
 
 def merge_cells_fn(workbook, worksheet, worksheet_name, heading1, heading2, heading4, heading7):
     """ Add item headings to cells and merge.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param worksheet_name: string object containing the worksheet name.
@@ -184,6 +188,7 @@ def merge_cells_fn(workbook, worksheet, worksheet_name, heading1, heading2, head
 
 def define_column_widths_fn(workbook, worksheet):
     """ define and set column widths.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :return: workbook: updated workbook object.
@@ -206,9 +211,10 @@ def define_column_widths_fn(workbook, worksheet):
 
 def list_of_photos_fn(site_dir, search_criteria):
     """ Search a directory for a file (search criteria and return a filename variable.
-    :param site_dir: string object containing the path to site directory.
-    :param search_criteria: wildcard variable.
-    :return: file_name string object containing the matching file name or None. """
+
+            :param site_dir: string object containing the path to site directory.
+            :param search_criteria: wildcard variable.
+            :return: file_name string object containing the matching file name or None. """
 
     for root, dirs, files in os.walk(site_dir):
 
@@ -223,19 +229,19 @@ def list_of_photos_fn(site_dir, search_criteria):
 def main_routine(color_fill, heading1, heading2, heading3, heading4, heading5, heading7, workbook, obs_data_list,
                  site_dir, insert_vertical_data_fn, insert_horizontal_data_fn):
     """This script creates the disturbance worksheet within the current workbook.
-            :param color_fill:
-            :param heading1:
-            :param heading2:
-            :param heading3:
-            :param heading4:
-            :param heading5:
-            :param heading7:
-            :param workbook:
-            :param obs_data_list:
-            :param site_dir:
-            :param insert_vertical_data_fn:
-            :param insert_horizontal_data_fn:
-            """
+
+            :param color_fill: workbook style derived  from define colour_fill_fn.
+            :param heading1: workbook style derived  from define heading1_fn.
+            :param heading2: workbook style derived  from define heading2_fn.
+            :param heading3: workbook style derived  from define heading3_fn.
+            :param heading4: workbook style derived  from define heading4_fn.
+            :param heading5: workbook style derived  from define heading5_fn.
+            :param heading7: workbook style derived  from define heading7_fn.
+            :param workbook: open workbook object derived from create_workbook_fn function.
+            :param obs_data_list: list object with list elements containing input data for the entire workbook.
+            :param site_dir: string object containing the path to the current site directory.
+            :param insert_vertical_data_fn: function controlling a vertical data insertion loop.
+            :param insert_horizontal_data_fn: function controlling a horizontal data insertion loop. """
 
     print('step10_5_create_site_disturbance.py INITIATED')
 

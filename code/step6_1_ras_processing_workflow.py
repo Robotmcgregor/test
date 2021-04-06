@@ -135,31 +135,34 @@ def location_fn(row):
     """ extract the district, property and site information.
 
             :param row: pandas dataframe row value object.
-            :return location_list: list object containing four string variables:
-            district, listed_property, unlisted_property and site. """
+            :return location_list: list object containing five string variables:
+            district, listed_property, unlisted_property, final_property and site. """
 
     # district
-    district = str((row['DISTRICT']).replace('_', ' '))
+    district = string_clean_title_fn(str(row['DISTRICT']))
+
+    listed_property = str(row['PROP:PROPERTY'])
 
     # property name
-    if str(row[
-               'PROP:PROPERTY']) == 'B_property_outside' or 'D_property_outside' or 'G_property_outside' or \
-            'K_property_outside' or 'NAS_property_outside' or 'P_property_outside' or 'R_property_outside' or \
-            'SAS_property_outside' or 'SP_property_outside' or 'TC_property_outside' or 'VR_property_outside' or \
-            'NP_property_outside' or 'NP_prop_new':
+    if str(row['PROP:PROPERTY']) in set(
+            ('NP_prop_new', 'B_property_outside', 'D_property_outside', 'G_property_outside',
+             'K_property_outside', 'NAS_property_outside', 'P_property_outside', 'R_property_outside',
+             'SAS_property_outside', 'SP_property_outside', 'TC_property_outside', 'VR_property_outside',
+             'NP_property_outside')):
 
         listed_property = np.nan
-        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))
-
+        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))  # todo property name not working
+        final_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))  # todo property name not working
     else:
-        listed_property = np.nan
-        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))
+        listed_property = string_clean_title_fn(str(row['PROP:PROPERTY']))
+        unlisted_property = np.nan
+        final_property = string_clean_title_fn(str(row['PROP:PROPERTY']))
 
     site1 = str(row['GROUP_SITE:SITE_FINAL'])
 
     # call the stringCleanFN function
     site = string_clean_upper_fn(site1)
-    location_list = [district, listed_property, unlisted_property, site]
+    location_list = [district, listed_property, unlisted_property, final_property, site]
     return location_list
 
 
@@ -218,6 +221,26 @@ def gps_points_fn(row):
     return lat_lon_list
 
 
+def prop_code_extraction_fn(estate_series, property_name, site):
+    """ Extract the common name from the botanical_common_series excel document.
+
+            :param estate_series: geopandas series object containing property and property code variables.
+            :param property_name: string object containing the property name passed into the function.
+            :return prop_code: string object containing the property code. """
+
+    property_name_list = estate_series.PROPERTY.tolist()
+    prop_upper = string_clean_upper_fn(str(property_name))
+    if prop_upper in property_name_list:
+        prop_code = estate_series.loc[estate_series['PROPERTY'] == prop_upper, 'PROP_TAG'].iloc[0]
+    else:
+        prop_code = property_name
+
+    prop_code. replace(" ", "_")
+    code_site = prop_code + "_" + site
+
+    return prop_code, code_site
+
+
 def main_routine(file_path, temp_dir, veg_list_excel):
     """ Control the ras data extraction workflow producing two outputs.
 
@@ -233,10 +256,14 @@ def main_routine(file_path, temp_dir, veg_list_excel):
 
     print('step6_1_ras_processing_workflow.py INITIATED.')
 
+    # import the pastoral estate shapefile to extract prop_tag
+    estate_path = (r"Z:\Scratch\Rob\shapefiles\pastoral_estate.shp")#todo add to command args
+
     # Read in the star transect csv as  a Pandas DataFrame.
     df = pd.read_csv(file_path)
 
     final_ras_list = []
+    final_ras_photo_list = []
 
     for index, row in df.iterrows():
         # call the date_time_fn function to extract date and time information.
@@ -256,13 +283,25 @@ def main_routine(file_path, temp_dir, veg_list_excel):
         meta_data_list = meta_data_fn(row)
 
         # extract the site variable from the location list
-        site = location_list[3:][0]
+        site = location_list[4:][0]
+
+        # read in the estate shapefile and create series
+        estate = gpd.read_file(estate_path)
+        estate_series = estate[['PROPERTY', 'PROP_TAG']]
+
+        # extract the final property value
+        final_prop = location_list[3:4][0]
+        print("final_prop: ", final_prop)
+        # call the extract_prop_code_fn function to extract the property code
+        prop_code, site_code = prop_code_extraction_fn(estate_series, final_prop, site)
+        print(prop_code, site_code)
 
         # create a clean list and append/extend output lists and variables
         clean_list = [site]
         clean_list.extend(date_time_list)
         clean_list.append(obs_recorder)
-        clean_list.extend(location_list[:3])
+        clean_list.extend(location_list[:4])
+        clean_list.extend([prop_code, site_code])
         clean_list.extend(lat_lon_list)
 
         print('step6_1_ras_processing_workflow.py COMPLETED')
@@ -270,12 +309,12 @@ def main_routine(file_path, temp_dir, veg_list_excel):
 
         # call the step6_2_ras_land_types.py script.
         import step6_2_ras_land_types
-        ras_clean_list = step6_2_ras_land_types.main_routine(
+        clean_list = step6_2_ras_land_types.main_routine(
             clean_list, row, string_clean_capital_fn, string_clean_title_fn, string_clean_upper_fn)
 
         # call the step6_3_ras_disturbance.py script.
         import step6_3_ras_disturbance
-        ras_clean_list = step6_3_ras_disturbance.main_routine(
+        clean_list = step6_3_ras_disturbance.main_routine(
             clean_list, row, string_clean_capital_fn)
 
         # call the step5_3_woody_botanical.py script.
@@ -291,18 +330,19 @@ def main_routine(file_path, temp_dir, veg_list_excel):
         # call the step6_6_ras_photos.py script.
         import step6_6_ras_photos
         clean_list, ras_photo_list = step6_6_ras_photos.main_routine(
-            clean_list, row, site)
+            clean_list, row, site_code)
 
         # add metadata variables
         clean_list.extend(meta_data_list)
-
         final_ras_list.append(clean_list)
+        final_ras_photo_list.append(ras_photo_list)
 
     # convert the final list to a DataFrame
     ras_df = pd.DataFrame(final_ras_list)
 
     ras_df.columns = [
-        'site', 'date', 'date_time', 'recorder', 'district', 'prop', 'unlist_prop', 'gps', 'c_lat',
+        'site_orig', 'date', 'date_time', 'recorder', 'district', 'prop', 'unlist_prop', 'final_prop', 'prop_code',
+        'site', 'gps', 'c_lat',
         'c_lon', 'c_acc', 'desc', 'erod_soil', 'bare_soil', 'land_system',
         'ls_consist',
         'ls_alt', 'ls_source', 'water_point', 'water_name', 'water_dir', 'water_dist', 'camel', 'rabbit',
@@ -318,12 +358,15 @@ def main_routine(file_path, temp_dir, veg_list_excel):
         'photo_bear2', 'site_photo3', 'photo_bear3', 'eros_photo1', 'photo_bear1', 'eros_photo2', 'eros_bear2',
         'eros_photo3', 'eros_bear3', 'meta_key', 'clean_meta_key', 'form']
 
-    #todo ras need to have prop code call in the estade shapefile and concatinate it to the begining of the ras number
+    cols = ['basal', 'tree_density', 'shrub_density']
 
-    """ras_df['final_prop'] = ras_df['prop'].fillna(ras_df['unlist_prop'])"""
+    # replace all int and float missing variables with a 0 value
+    ras_df[cols] = ras_df[cols].fillna(0)
+    ras_df2 = ras_df.replace('Nan', 'nan')
+
     csv_output = (temp_dir + '\\clean_ras.csv')
 
-    ras_df.to_csv(csv_output)
+    ras_df2.to_csv(csv_output)
 
     print('------------------------------------------------------------')
     print('The following outputs have been created:')
@@ -332,7 +375,7 @@ def main_routine(file_path, temp_dir, veg_list_excel):
     # create a geoDataFrame
     ras_gdf = gpd.GeoDataFrame(
         ras_df, geometry=gpd.points_from_xy(
-            ras_df.c_lon, ras_df.c_lat), crs="EPSG:4326")
+            ras_df2.c_lon, ras_df.c_lat), crs="EPSG:4326")
 
     shp_output = (temp_dir + '\\clean_ras.shp')
 
@@ -340,7 +383,17 @@ def main_routine(file_path, temp_dir, veg_list_excel):
     ras_gdf.to_file(shp_output, driver='ESRI Shapefile')
     print('-', shp_output)
 
-    print('The RAs ODK Aggregate csv file has been processed.........')
+    # create a dataFrame and export as a csv containing the photo_url_extraction_fn urls.
+    ras_photo_list_df = pd.DataFrame(final_ras_photo_list)
+    ras_photo_list_df.columns = ['site', 'site_photo1', 'bearing_photo1', 'site_photo2', 'bearing_photo2',
+                                 'site_photo3', 'bearing_photo3',
+                                 'erosion_photo1', 'bearing_erosion1', 'erosion_photo2', 'bearing_erosion2',
+                                 'erosion_photo3', 'bearing_erosion3']
+    csv_output = (temp_dir + '\\photo_ras_url.csv')
+    ras_photo_list_df.to_csv(csv_output)
+    print('-', csv_output)
+
+    print('The RAS ODK Aggregate csv file has been processed.........')
 
 
 if __name__ == '__main__':

@@ -17,13 +17,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 SOFTWARE.
 """
 
-import xlsxwriter
-from openpyxl import load_workbook
-import pandas as pd
-
 
 def create_worksheet_fn(workbook, worksheet_name):
     """ Create establishment worksheet and set row height.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet_name: string object containing worksheet name."""
 
@@ -38,12 +35,13 @@ def create_worksheet_fn(workbook, worksheet_name):
 
 def insert_sheet_headings_fn(workbook, worksheet, heading2, heading4, color_fill, range_value):
     """ Add item headings to cells as strings.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading2: workbook style derived  from define heading2_fn.
             :param heading4: workbook style derived  from define heading4_fn.
-            :param color_fill:
-            :param range_value:
+            :param color_fill: workbook style derived  from define colour_fill_fn.
+            :param range_value: range of integers as a tuple (i.e.(1, 101)).
             :return: workbook: updated workbook object.
             :return worksheet: updated worksheet object."""
 
@@ -62,7 +60,8 @@ def insert_sheet_headings_fn(workbook, worksheet, heading2, heading4, color_fill
 
 def insert_blank_formatted_cells_fn(workbook, worksheet, heading7, range_value):
     """ Add blank formatted cells to worksheet.
-            :param range_value:
+
+            :param range_value: range of integers as a tuple (i.e.(1, 101)).
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading7: workbook style derived  from define heading7_fn.
@@ -78,6 +77,7 @@ def insert_blank_formatted_cells_fn(workbook, worksheet, heading7, range_value):
 
 def merge_cells(workbook, worksheet, heading1, heading7):
     """ Add item headings to cells and merge.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading1: workbook style derived  from define heading1_fn.
@@ -109,8 +109,9 @@ def define_column_widths_fn(workbook, worksheet):
 
 def extract_features_to_list_fn(clean_df_list):
     """ Extract ground, below and above variables and add them to a list of lists.
-            :param clean_df_list:
-            :return content_list:  """
+            :param clean_df_list: list of open pandas data frames containing the 100 point transect data.
+            :return content_list:  list object containing three transect elements of 100 points each: ground, below
+                and above. """
 
     df = clean_df_list[0]
 
@@ -125,9 +126,11 @@ def extract_features_to_list_fn(clean_df_list):
 
 def insert_variables_to_transect_sheet_fn(content_list, workbook, worksheet):
     """ Insert df values to Observational Sheet (column by column).
-            :param content_list:
-            :param workbook:
-            :param worksheet:
+
+            :param content_list:  list object containing three transect elements of 100 points each: ground, below
+                and above.
+            :param workbook: open workbook object derived from create_workbook_fn function.
+            :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :return: workbook: updated workbook object.
             :return worksheet: updated worksheet object."""
 
@@ -150,17 +153,18 @@ def insert_variables_to_transect_sheet_fn(content_list, workbook, worksheet):
 
 def main_routine(clean_df_list, color_fill, heading1, heading2, heading4, heading7, workbook, star,
                  insert_vertical_data_fn):
-    """
-            :param clean_df_list:
-            :param color_fill:
-            :param heading1:
-            :param heading2:
-            :param heading4:
-            :param heading7:
-            :param workbook:
-            :param star:
-            :param insert_vertical_data_fn:
-    """
+    """ Create the site visit worksheet within the Rangeland Monitoring observation excel workbook.
+
+            :param clean_df_list: list of open pandas data frames containing the 100 point transect data.
+            :param color_fill: workbook style derived  from define colour_fill_fn.
+            :param heading1: workbook style derived  from define heading1_fn.
+            :param heading2: workbook style derived  from define heading2_fn.
+            :param heading4: workbook style derived  from define heading4_fn.
+            :param heading7: workbook style derived  from define heading7_fn.
+            :param workbook: open workbook object derived from create_workbook_fn function.
+            :param star: pandas data frame object.
+            :param insert_vertical_data_fn: function controlling a vertical data insertion loop. """
+
     worksheet_name_list = ['Step 4A - Transect 1', 'Step 4B - Transect 2', 'Step 4C - Transect 3']
 
     x = 0

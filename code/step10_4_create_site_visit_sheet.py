@@ -19,12 +19,10 @@ SOFTWARE.
 
 """
 
-# import modules
-# no modules to import
-
 
 def create_worksheet(workbook, worksheet_name):
     """ Create establishment worksheet and set row height.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet_name: string object containing worksheet name."""
 
@@ -39,6 +37,7 @@ def create_worksheet(workbook, worksheet_name):
 
 def insert_sheet_headings(workbook, worksheet, heading2, heading3):
     """ Add item headings to cells as strings.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading2: workbook style derived  from define heading2_fn.
@@ -64,6 +63,7 @@ def insert_sheet_headings(workbook, worksheet, heading2, heading3):
 
 def insert_blank_formatted_cells_fn(workbook, worksheet, heading7):
     """ Add blank formatted cells to worksheet.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading7: workbook style derived  from define heading7_fn.
@@ -86,6 +86,7 @@ def insert_blank_formatted_cells_fn(workbook, worksheet, heading7):
 
 def merge_cells_fn(workbook, worksheet, worksheet_name, heading1):
     """ Add item headings to cells and merge.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param worksheet_name: string object containing the worksheet name.
@@ -112,6 +113,16 @@ def define_column_widths_fn(workbook, worksheet):
 
 
 def main_routine(heading1, heading2, heading3, heading7, workbook, obs_data_list, insert_vertical_data_fn):
+    """ Create the site visit worksheet within the Rangeland Monitoring observation excel workbook.
+
+            :param heading1: workbook style derived  from define heading1_fn.
+            :param heading2: workbook style derived  from define heading2_fn.
+            :param heading3: workbook style derived  from define heading3_fn.
+            :param heading7: workbook style derived  from define heading7_fn.
+            :param workbook: open workbook object derived from create_workbook_fn function.
+            :param obs_data_list: list object with list elements containing input data for the entire workbook.
+            :param insert_vertical_data_fn: function controlling a vertical data insertion loop.  """
+
     worksheet_name = 'Step 2 - Visit Details'
 
     # call the createEstablishmentWorksheet function.

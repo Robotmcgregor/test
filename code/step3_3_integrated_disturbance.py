@@ -30,7 +30,7 @@ def disturbance_fn(row):
     """ extract disturbance category indicators.
 
             :param row: pandas dataframe row value object.
-            :return: dist_list: list object containing eight disturbance category variables:
+            :return: photo_list: list object containing eight disturbance category variables:
                 dist1, dist2, dist3, dist4, dist5, dist6, dist7, dist8."""
 
     dist_list = []
@@ -38,17 +38,17 @@ def disturbance_fn(row):
         dist = str(row['GROUP_PHOTOS:DEST' + str(i + 1)])
         dist_list.append(dist)
 
-    print('dist_list: ', dist_list)
+    print('photo_list: ', dist_list)
     return dist_list
 
 
 def clearing_cyclone_dieback_fn(dist_list):
-    """ Determine if any of the three variables within the ordered_list are contained within the dist_list, creating a
+    """ Determine if any of the three variables within the ordered_list are contained within the photo_list, creating a
     new ordered list (output_list) (match -> variable, no match -> str(nan).
 
             :param dist_list: list object containing eight disturbance category variables created under the
             disturbance_fn function.
-            :return: output_list: ordered list object that was matched from ordered_list variables within the dist_list
+            :return: output_list: ordered list object that was matched from ordered_list variables within the photo_list
             of three variables: 'clearing', 'cyclone', 'dieback'."""
 
     ordered_list = ['clearing', 'cyclone', 'dieback']
@@ -67,7 +67,7 @@ def pres_abs_disturbance_fn(dist_class_list):
     """ assign present or absent to the respective disturbance features.
 
             :param dist_class_list: ordered list object that was matched from ordered_list variables within the
-            dist_list of three variables, created by the clearing_cyclone_dieback_fn function.
+            photo_list of three variables, created by the clearing_cyclone_dieback_fn function.
             :return: dist_pa_list ordered list object derived from dist_class_object with matched variables
             (match -> str(Present)),  (no match - str(Absent)). """
 

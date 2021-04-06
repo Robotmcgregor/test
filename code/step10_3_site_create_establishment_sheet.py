@@ -27,6 +27,7 @@ import pandas as pd
 
 def create_worksheet_fn(workbook, worksheet_name):
     """ Create establishment worksheet and set row height.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet_name: string object containing worksheet name."""
 
@@ -41,6 +42,7 @@ def create_worksheet_fn(workbook, worksheet_name):
 
 def insert_sheet_headings_fn(workbook, worksheet, heading2, heading3):
     """ Add item headings to cells as strings.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading2: workbook style derived  from define heading2_fn.
@@ -85,6 +87,7 @@ def insert_sheet_headings_fn(workbook, worksheet, heading2, heading3):
 
 def insert_blank_formatted_cells_fn(workbook, worksheet, heading7):
     """ Add blank formatted cells to worksheet.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param heading7: workbook style derived  from define heading7_fn.
@@ -102,6 +105,7 @@ def insert_blank_formatted_cells_fn(workbook, worksheet, heading7):
 
 def merge_cells(workbook, worksheet, worksheet_name, heading1, heading2, heading7):
     """ Add item headings to cells and merge.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param worksheet_name: string object containing the worksheet name.
@@ -144,6 +148,7 @@ def merge_cells(workbook, worksheet, worksheet_name, heading1, heading2, heading
 
 def define_column_widths_fn(workbook, worksheet):
     """ define and set column widths.
+
             :param workbook: open workbook object derived from create_workbook_fn function.
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :return: workbook: updated workbook object.
@@ -160,6 +165,7 @@ def define_column_widths_fn(workbook, worksheet):
 
 def insert_vertical_data_fn(worksheet, row, col, input_list, style, factor):
     """ Insert data (list of lists) vertically.
+
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param row: integer object containing the row start number for data insertion.
             :param col: integer object containing the column start number for data insertion.
@@ -176,6 +182,7 @@ def insert_vertical_data_fn(worksheet, row, col, input_list, style, factor):
 
 def insert_horizontal_data_fn(worksheet, row, col, input_list, style, factor):
     """ Insert data (list of lists) horizontally.
+
             :param worksheet: worksheet object current worksheet derived from create_worksheet_fn.
             :param row: integer object containing the row start number for data insertion.
             :param col: integer object containing the column start number for data insertion.
@@ -192,14 +199,16 @@ def insert_horizontal_data_fn(worksheet, row, col, input_list, style, factor):
 
 def main_routine(heading1, heading2, heading3, heading7, workbook, obs_data_list):
     """This scrip creates the site establishment worksheet within th newly created observation workbook.
-    :param heading1:
-    :param heading2:
-    :param heading3:
-    :param heading7:
-    :param workbook:
-    :param obs_data_list:
-    :return:
-    """
+
+            :param heading1: workbook style derived  from define heading1_fn.
+            :param heading2: workbook style derived  from define heading2_fn.
+            :param heading3: workbook style derived  from define heading3_fn.
+            :param heading7: workbook style derived  from define heading7_fn.
+            :param workbook: open workbook object derived from create_workbook_fn function.
+            :param obs_data_list: list object with list elements containing input data for the entire workbook.
+            :return:insert_vertical_data_fn: function controlling a vertical data insertion loop.
+            :return insert_horizontal_data_fn: function controlling a horizontal data insertion loop. """
+
     print('createSiteEstablishmentSheetP.py INITIATED.')
 
     work_sheet_name = 'Step 1 - Site Establishment'
@@ -243,6 +252,7 @@ def main_routine(heading1, heading2, heading3, heading7, workbook, obs_data_list
     print('step10_4_site_create_visit_sheet.py initiating..........')
 
     return insert_vertical_data_fn, insert_horizontal_data_fn
+
 
 if __name__ == '__main__':
     main_routine()

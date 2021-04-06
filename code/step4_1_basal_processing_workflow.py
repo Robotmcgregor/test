@@ -134,34 +134,34 @@ def location_fn(row):
     """ extract the district, property and site information.
 
             :param row: pandas dataframe row value object.
-            :return district: string object containing the district variable.
-            :return listed_property: string object containing the property name variable if listed.
-            :return site: string object containing the site name variable.
-            :return unlisted_property: string object containing the property name in name is not listed. """
+            :return location_list: list object containing five string variables:
+            district, listed_property, unlisted_property, final_property and site. """
 
     # district
-    district = str((row['DISTRICT']).replace('_', ' '))
+    district = string_clean_title_fn(str(row['DISTRICT']))
+
+    listed_property = str(row['PROP:PROPERTY'])
 
     # property name
-    if str(row[
-               'PROP:PROPERTY']) == 'B_property_outside' or 'D_property_outside' or 'G_property_outside' or \
-            'K_property_outside' or 'NAS_property_outside' or 'P_property_outside' or 'R_property_outside' or \
-            'SAS_property_outside' or 'SP_property_outside' or 'TC_property_outside' or 'VR_property_outside' or \
-            'NP_property_outside' or 'NP_prop_new':
+    if str(row['PROP:PROPERTY']) in set(
+            ('NP_prop_new', 'B_property_outside', 'D_property_outside', 'G_property_outside',
+             'K_property_outside', 'NAS_property_outside', 'P_property_outside', 'R_property_outside',
+             'SAS_property_outside', 'SP_property_outside', 'TC_property_outside', 'VR_property_outside',
+             'NP_property_outside')):
 
         listed_property = np.nan
-        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))
-
+        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))  # todo property name not working
+        final_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))  # todo property name not working
     else:
-        listed_property = np.nan
-        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))
+        listed_property = string_clean_title_fn(str(row['PROP:PROPERTY']))
+        unlisted_property = np.nan
+        final_property = string_clean_title_fn(str(row['PROP:PROPERTY']))
 
     site1 = str(row['GROUP_SITE:SITE_FINAL'])
 
     # call the stringCleanFN function
     site = string_clean_upper_fn(site1)
-
-    location_list = [district, listed_property, unlisted_property, site]
+    location_list = [district, listed_property, unlisted_property, final_property, site]
     return location_list
 
 
@@ -252,13 +252,13 @@ def main_routine(file_path, temp_dir):
         meta_data_list = meta_data_fn(row)
 
         # extract the site variable from the location list
-        site = location_list[3:][0]
+        site = location_list[4:][0]
 
         # create a clean list and append/extend output lists and variables
         clean_list = [site]
         clean_list.extend(date_time_list)
         clean_list.append(obs_recorder)
-        clean_list.extend(location_list[:3])
+        clean_list.extend(location_list[:4])
         clean_list.extend(lat_lon_list)
 
         print('step4_1_basal_processing_workflow.py.py COMPLETED')
@@ -281,7 +281,7 @@ def main_routine(file_path, temp_dir):
     # convert the final list to a DataFrame
     basal_df = pd.DataFrame(final_basal_list)
     basal_df.columns = [
-        'site', 'date', 'date_time', 'recorder', 'district', 'prop', 'unlist_prop', 'gps', 'c_lat',
+        'site', 'date', 'date_time', 'recorder', 'district', 'prop', 'unlist_prop', 'final_prop', 'gps', 'c_lat',
         'c_lon', 'c_acc', 'factor', 'basal1', 'dead_tree1', 'live_tree1',
         'dead_shrub1', 'live_shrub1', 'basal2', 'dead_tree2', 'live_tree2', 'dead_shrub2', 'live_shrub2', 'basal3',
         'dead_tree3', 'live_tree3', 'dead_shrub3', 'live_shrub3', 'basal4', 'dead_tree4', 'live_tree4', 'dead_shrub4',

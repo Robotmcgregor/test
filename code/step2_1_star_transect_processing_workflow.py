@@ -135,27 +135,34 @@ def location_fn(row):
     """ extract the district, property and site information.
 
             :param row: pandas dataframe row value object.
-            :return location_list: list object containing four string variables:
-            district, listed_property, unlisted_property and site. """
+            :return location_list: list object containing five string variables:
+            district, listed_property, unlisted_property, final_property and site. """
 
     # district
-    district = str((row['DISTRICT']).replace('_', ' '))
+    district = string_clean_title_fn(str(row['DISTRICT']))
+
+    listed_property = str(row['PROP:PROPERTY'])
 
     # property name
-    if str(row['PROP:PROPERTY']) == 'B_property_outside' or 'D_property_outside' or 'G_property_outside' or \
-            'K_property_outside' or 'NAS_property_outside' or 'P_property_outside' or 'R_property_outside' or \
-            'SAS_property_outside' or 'SP_property_outside' or 'TC_property_outside' or 'VR_property_outside' or \
-            'NP_property_outside' or 'NP_prop_new':
+    if str(row['PROP:PROPERTY']) in set(
+            ('NP_prop_new', 'B_property_outside', 'D_property_outside', 'G_property_outside',
+             'K_property_outside', 'NAS_property_outside', 'P_property_outside', 'R_property_outside',
+             'SAS_property_outside', 'SP_property_outside', 'TC_property_outside', 'VR_property_outside',
+             'NP_property_outside')):
 
         listed_property = np.nan
-        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))#todo property name not working
-
+        unlisted_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))  # todo property name not working
+        final_property = string_clean_title_fn(str(row['PROP:NOT_PASTORAL_NAME2']))  # todo property name not working
+    else:
+        listed_property = string_clean_title_fn(str(row['PROP:PROPERTY']))
+        unlisted_property = np.nan
+        final_property = string_clean_title_fn(str(row['PROP:PROPERTY']))
 
     site1 = str(row['GROUP_SITE:SITE_FINAL'])
 
     # call the stringCleanFN function
     site = string_clean_upper_fn(site1)
-    location_list = [district, listed_property, unlisted_property, site]
+    location_list = [district, listed_property, unlisted_property, final_property, site]
     return location_list
 
 
@@ -287,13 +294,13 @@ def main_routine(file_path, temp_dir, veg_list_excel):
         # create a list of variables to create a cleaned dataframe.
 
         # extract the site variable from the location list
-        site = location_list[3:][0]
+        site = location_list[4:][0]
 
         # create a clean list and append/extend output lists and variables
         clean_list = [site]
         clean_list.extend(date_time_list)
         clean_list.extend([obs_recorder, obs_estimator])
-        clean_list.extend(location_list[:3])
+        clean_list.extend(location_list[:4])
         clean_list.extend(lat_lon_list)
 
         print('step2_1_star_transect_processing_workflow.py COMPLETED')
@@ -319,15 +326,15 @@ def main_routine(file_path, temp_dir, veg_list_excel):
         if veg_list:
             print('veg_list is not empty')  # todo double check that these variables hit the correct cells.
             print("veg_list: ", veg_list)
-            clean_list[95] = veg_list[0]
-            clean_list[97] = veg_list[1]
-            clean_list[100] = veg_list[3]
-            clean_list[103] = veg_list[4]
-            clean_list[105] = veg_list[5]
-            clean_list[106] = veg_list[6]
-            clean_list[107] = veg_list[7]
-            clean_list[108] = veg_list[8]
-            clean_list[109] = veg_list[9]
+            clean_list[96] = veg_list[0]
+            clean_list[98] = veg_list[1]
+            clean_list[101] = veg_list[3]
+            clean_list[104] = veg_list[4]
+            clean_list[106] = veg_list[5]
+            clean_list[107] = veg_list[6]
+            clean_list[108] = veg_list[7]
+            clean_list[109] = veg_list[8]
+            clean_list[110] = veg_list[9]
 
         final_star_list.append(clean_list)
         final_star_photo_list.append(photo_url_list)
@@ -338,7 +345,7 @@ def main_routine(file_path, temp_dir, veg_list_excel):
     # create offset geoDataFrame and export a shapefile lon lat set to center points.
     star_transect_df = pd.DataFrame(final_star_list)
     star_transect_df.columns = (
-        'site', 'date', 'date_time', 'recorder', 'estimator', 'district', 'prop', 'unlist_prop',
+        'site', 'date', 'date_time', 'recorder', 'estimator', 'district', 'prop', 'unlist_prop', 'final_prop',
         'gps', 'c_lat', 'c_lon', 'c_acc', 'off_direct', 'o_lat', 'o_lon', 'o_acc',
 
         'transect1', 't1_bare', 't1_gravel', 't1_rock', 't1_ash', 't1_litter', 't1_crypto', 't1_dead_pg', 't1_green_pg',
@@ -421,8 +428,8 @@ def main_routine(file_path, temp_dir, veg_list_excel):
     print('-', shp_output)
 
     # create a geoDataFrame and export as a shapefile lon lat set to offset points.
-    off_set_star_df = star_transect_df3[['date', 'date_time', 'recorder', 'estimator', 'district', 'prop',
-                                         'unlist_prop', 'off_direct', 'o_acc', 'o_lat', 'o_lon', 'meta_key',
+    off_set_star_df = star_transect_df3[['date', 'date_time', 'recorder', 'estimator', 'district', 'final_prop',
+                                          'off_direct', 'o_acc', 'o_lat', 'o_lon', 'meta_key',
                                          'meta_key', 'form']]
     off_set_star_gdf = gpd.GeoDataFrame(
         off_set_star_df, geometry=gpd.points_from_xy(off_set_star_df.o_lon, off_set_star_df.o_lat), crs="EPSG:4326")

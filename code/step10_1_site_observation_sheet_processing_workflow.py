@@ -18,56 +18,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 SOFTWARE.
 """
 
-''' 
-
-Discription.
-
-transectVariables1P.py imports the three odk transect tables whech have been extracted for the previous script aggregateStarTransect1P.py and converts them to three seperate DataFrames, changing the 
-varibles ((i.e. bare_ground) to the correct format for the RLM database.
-This script exports a list containg three open DataFrames called clean_df_list.
-
-On completion, the script calls step10_2_observation_sheet_formatting.py
-
-
-Prerequisits
-
--- .html files contained in the site_dir. These files contain the point(repeat) information collected from the star transect ODK fiel form. These files have been extracted and downloaded fro
-from ODK aggregate uin the previous script aggregateStarTransect1P.py.
-=========
-
-Variables
-=========
-
-above_values: dictionary
-Dictionary object containing the naming convention within the ODK Aggregate table and the required naming convention for the Observational sheet for the 'above' feature.
-
-below_values: dictionary
-Dictionary object containing the naming convention within the ODK Aggregate table and the required naming convention for the Observational sheet for the 'below' feature.
-
-clean_df_list: list
-List object containing the cleaned 'df' DataFrame's containing only the 'ground', 'below', 'above' features with the RM database required terminology for the observational sheet transects pages.
-
-df: DataFrame
-DataFrame object housing the cleaned .html table information which is ready for observational sheet insertion.
-
-html_list: list
-List object containing all of the .html files within the xxxx directory - .html files contain the transect data collected when undergoing a 100 point transect using the star transect odk form xxxx.
-
-ground_values: dictionary
-Dictionary object containing the naming convention within the ODK Aggregate table and the required naming convention for the Observational sheet. for the 'ground' feature.
-
-htmlTable: DataFrame
-DataFrame object containing the complete html table derived from ODK Aggregate as a DaftaFrame.
-
-htmlTablePath: str
-String object housing the path to a single.html file contained within the html_list.
-
-site_dir: str
-String object containing the path to the newly created folder titled (YYYYMMDD_HHMM) within the export_dir directory.
-
-========================================================================================================
-'''
-
 # Import modules
 import pandas as pd
 import glob
@@ -77,7 +27,11 @@ warnings.filterwarnings("ignore")
 
 
 def search_html_files_fn(site_dir):
-    """ Search for all html files within a directory. """
+    """ Search for all html files within a directory.
+
+    :param site_dir: string object containing the path to the current site directory.
+    :return html_list: list of string objects containing the path to all located transect.html files. """
+
     # create an empty list
     html_list = []
 
@@ -88,8 +42,11 @@ def search_html_files_fn(site_dir):
     return html_list
 
 
-def table_clean_up_fn(html_list, site_dir):
-    """ Filter the DataFrame and rename feature headings."""
+def table_clean_up_fn(html_list):
+    """ Filter the DataFrame and rename feature headings.
+
+    :param html_list: list of string objects containing the path to all located transect.html files.
+    :return clean_df_list: list object containing open pandas dataframe elements produced by the transect.html files. """
 
     clean_df_list = []
 
@@ -101,14 +58,16 @@ def table_clean_up_fn(html_list, site_dir):
 
         # call the variable_renaming_fn function
         df = variable_renaming_fn(df)
-        df.to_csv(site_dir + '\\cleanDF.csv')
+
         clean_df_list.append(df)
 
     return clean_df_list
 
 
 def variable_renaming_fn(df):
-    """ Rename the feature variables for observational sheet insertion. """
+    """ Rename the feature variables for observational sheet insertion.
+            :param df: pandas data frame object.
+            :return df: pandas data frame that has had its values changed using the included dictionaries. """
 
     # Change values in columns to required values for workbook
     ground_values = {'bare': 'BARE GROUND', 'gravel': 'GRAVEL', 'rock': 'ROCK', 'ash': 'ASH', 'litter': 'LITTER',
@@ -135,16 +94,17 @@ def variable_renaming_fn(df):
     return df
 
 
-def main_routine(obs_data_list, ras_data_list, site, site_dir, star):
+def main_routine(obs_data_list, site, site_dir, star):
     """transectVariables1P.py imports the three odk transect tables which have been extracted for the previous script
     aggregateStarTransect1P.py and converts them to three separate DataFrames, changing the
     variables ((i.e. bare_ground) to the correct format for the RLM database.
+
     This script exports a list containing three open DataFrames called clean_df_list.
-        :param obs_data_list:
-        :param ras_data_list:
-        :param site:
-        :param site_dir:
-        :param star: """
+        :param obs_data_list: list object containing list elements containing observation data for
+        (one list per worksheet) insertion.
+        :param site: string object containing the site name.
+        :param site_dir: string object containing the path to the current site directory.
+        :param star: pandas data frame object. """
 
     print('step10_1_site_observation_sheet_processing_workflow.py INITIATED.')
 
@@ -152,7 +112,7 @@ def main_routine(obs_data_list, ras_data_list, site, site_dir, star):
     html_list = search_html_files_fn(site_dir)
 
     # call the table_clean_up_fn function
-    clean_df_list = table_clean_up_fn(html_list, site_dir)
+    clean_df_list = table_clean_up_fn(html_list)
 
     print('step10_1_site_observation_sheet_processing_workflow.py COMPLETED.')
     print('step10_2_observation_sheet_formatting.py initiating..........')
