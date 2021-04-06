@@ -52,7 +52,7 @@ def export_site_csv_fn(csv_list, temp_dir):
     """ Filter csv by site name and export csv.
 
             :param temp_dir: string object containing directory path.
-            :param csv_list: list object containing a list oc csv paths, defined under glob_dir_fn function.
+            :param csv_list: list object containing a list of csv paths, defined under glob_dir_fn function.
             :return df_list: list object containing open pandas data frames.
             :return dir_path: string object containing the path to a new directory called site_outputs.
             :return all_site_list: list object containing a unique list of sites.
@@ -176,7 +176,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
             estimates_hor_list12345 = [[], [], [], [], []]
             estimates_veg_list = [[], [], [], [], [], [], [], [], [], [], []]
 
-            visit_ver_list1 = []
+            visit_vert_list1 = []
 
             cond_hor_list1 = []
 
@@ -209,23 +209,28 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
             woody_vert_list12345678910 = [[], [], [], [], [], [], [], [], [], []]
 
         # TODO turn this field back on when back at the office
-        """
-        photo_int_url_csv = os.path.join(site_dir, site + 'photo_IntUrl.csv')
+        '''
+        photo_int_url_csv = os.path.join(site_dir, site + '_photo_integrated_url.csv')
         # print(photo_int_url_csv)
         if os.path.isfile(photo_int_url_csv):
-            print('photoIntUrl.csv exists.')
-            # run cleanIntData.
+            print('photo_int_url.csv exists.')
             import step8_6_site_integrated_photo_download
-            photo_disturb_list = step8_6_site_integrated_photo_download.main_routine(photo_int_url_csv, site, site_dir)
-
+            step8_6_site_integrated_photo_download.main_routine(photo_int_url_csv, site, site_dir)
+        
         photo_star_url_csv = os.path.join(site_dir, site + '_photo_star_url.csv')
         # print(photo_star_url_csv)
         if os.path.isfile(photo_star_url_csv):
-            print('photoStarUrl.csv exists.')
-            # run cleanIntData.
+            print('photo_star_url.csv exists.')
             import step8_7_site_star_photo_download
             step8_7_site_star_photo_download.main_routine(photo_star_url_csv, site, site_dir)
-        """
+
+        photo_ras_url_csv = os.path.join(site_dir, site + '_photo_ras_url.csv')
+        # print(photo_ras_url_csv)
+        if os.path.isfile(photo_ras_url_csv):
+            print('photo_ras_url.csv exists.')
+            import step8_8_site_ras_photo_download
+            step8_8_site_ras_photo_download.main_routine(photo_ras_url_csv, site, site_dir)
+        '''
         ras_csv = os.path.join(site_dir, site + '_clean_ras.csv')
         # print(ras_csv)
         if os.path.isfile(ras_csv):
@@ -239,8 +244,6 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
             import step8_5_site_ras_data_extraction
             ras_hort_list1234567891011121314, ras_vert_list123456789101112 = step8_5_site_ras_data_extraction.main_routine(
                 ras_csv, site, site_dir)
-
-
 
 
         else:
@@ -303,7 +306,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
                 # call the step9_2_aggregate_transect_extraction_remote_desktop.py script.
                 import step9_2_aggregate_transect_extraction_remote_desktop
                 step9_2_aggregate_transect_extraction_remote_desktop.main_routine(
-                    obs_data_list, ras_data_list, site, site_dir, star)
+                    obs_data_list, site, site_dir, star)
 
             elif os.path.isfile(ras_csv):
                 ras = pd.read_csv(ras_csv).fillna('BLANK').replace('Nan', 'BLANK')
@@ -328,7 +331,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
                 # call the step9_1_aggregate_transect_bypass_not_remote_desktop.py script.
                 import step9_1_aggregate_transect_bypass_not_remote_desktop
                 step9_1_aggregate_transect_bypass_not_remote_desktop.main_routine(
-                    directory_odk, obs_data_list, ras_data_list, site, site_dir, star)
+                    directory_odk, obs_data_list,  site, site_dir, star)
 
             elif os.path.isfile(ras_csv):
                 ras = pd.read_csv(ras_csv).fillna('BLANK').replace('Nan', 'BLANK')
