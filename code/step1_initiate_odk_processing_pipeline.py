@@ -47,6 +47,8 @@ def cmd_args_fn():
                    default=r"C:\Users\robot\new_z_drive\20210325_0640\20210323_1308\odk_veg_list_final.xlsx")
     p.add_argument('-s', '--shrub_list_excel', help='Odk shrub list Excel file path.',
                    default=r"C:\Users\robot\new_z_drive\20210325_0640\20210323_1308\dominantVegSplitDistricts2.xlsx")
+    p.add_argument('-p', '--pastoral_estate', help='File path to the pastoral estate shapefile.',
+                   default=r"C:\Users\Rob\PycharmProjects\rmb_aggregate_processing\shapefiles\pastoral_estate.shp")
 
     cmd_args = p.parse_args()
 
@@ -82,7 +84,7 @@ def temporary_dir(export_dir):
     return temp_dir
 
 
-def raw_odk_output_workflow_fn(file_path, search_criteria, temp_dir, veg_list_excel):
+def raw_odk_output_workflow_fn(file_path, search_criteria, temp_dir, veg_list_excel, pastoral_estate):
     """ Defines the script pathway depending on what raw ODK files are contained in the directory.
 
             :param dir_path: string object containing the raw odk output csv files.
@@ -90,10 +92,11 @@ def raw_odk_output_workflow_fn(file_path, search_criteria, temp_dir, veg_list_ex
             :param search_criteria: string object containing the raw odk file name and type.
             :param temp_dir: string object path to the created output directory (date_time).
             :param veg_list_excel: string object path to the odk veglist excel file (botanical and common names).
-            :param shrub_list_excel: string object path to the odk veglist excel file (3P grass list).
-            """
+            :param pastoral_estate: string object containing the file path to the pastoral estate shapefile. """
+
     print("Searching for ODK outputs..........")
     print(file_path)
+
     if search_criteria == 'RM_Star_Transect_results.csv':
 
         # call the step2_1_star_transect_processing_workflow.py script.
@@ -124,10 +127,11 @@ def raw_odk_output_workflow_fn(file_path, search_criteria, temp_dir, veg_list_ex
         print('RAS not completed')
         # call the step6_1_ras_processing_workflow.py script.
         import step6_1_ras_processing_workflow
-        step6_1_ras_processing_workflow.main_routine(file_path, temp_dir, veg_list_excel)
+        step6_1_ras_processing_workflow.main_routine(file_path, temp_dir, veg_list_excel, pastoral_estate)
 
 
-def odk_export_csv_checker_fn(dir_path, located_list, search_criteria, temp_dir, veg_list_excel, shrub_list_excel):
+def odk_export_csv_checker_fn(dir_path, located_list, search_criteria, temp_dir, veg_list_excel, shrub_list_excel,
+                              pastoral_estate):
     """ Search for a specific odk csv output.
 
         :param located_list:
@@ -136,7 +140,8 @@ def odk_export_csv_checker_fn(dir_path, located_list, search_criteria, temp_dir,
         :param temp_dir: string object path to the created output directory (date_time).
         :param veg_list_excel: string object path to the odk veglist excel file (containing botanical and common names).
         :param shrub_list_excel: string object path to the odk veglist excel file (containing a 3P grass list).
-        """
+        :param pastoral_estate: string object containing the file path to the pastoral estate shapefile. """
+
     file_path = (dir_path + '\\' + search_criteria)
     # print('file_path: ', file_path)
     if not os.path.exists(file_path):
@@ -146,7 +151,7 @@ def odk_export_csv_checker_fn(dir_path, located_list, search_criteria, temp_dir,
     else:
         print(search_criteria, ' located, initiating script..........')
         # call the import_script_fn function.
-        raw_odk_output_workflow_fn(file_path, search_criteria, temp_dir, veg_list_excel)
+        raw_odk_output_workflow_fn(file_path, search_criteria, temp_dir, veg_list_excel, pastoral_estate)
 
         located = True
     located_list.append(located)
@@ -156,10 +161,21 @@ def odk_export_csv_checker_fn(dir_path, located_list, search_criteria, temp_dir,
 
 def main_routine():
     """ This pipeline searches through a directory for the Rangelends Monitoring Branch raw odk outputs.
-    inputs must include raw odk csv with the name unchanged from the aggregate download.
-    Additional inputs are required if running the pipeline outside of the remote desktop (PG-BAS14) and
-    processing included integrated data.
-    Additional inputs:
+            :param directory_odk: (command argument) directory_odk
+            :param export_dir: (command argument) cmd_args.export_dir
+            :param chrome_driver: (command argument) cmd_args.chrome_driver
+            :param remote_desktop: (command argument) cmd_args.remote_desktop
+            :param veg_list_excel: (command argument) cmd_args.veg_list_excel
+            :param shrub_list_excel: (command argument) cmd_args.shrub_list_excel
+            :param pastoral_estate: (command argument) cmd_args.pastoral_estate
+            :return observation spreadsheet (one per site)
+            :return ras spreadsheet (one per site)
+            :return
+
+            inputs must include raw odk csv with the name unchanged from the aggregate download.
+            Additional inputs are required if running the pipeline outside of the remote desktop (PG-BAS14) and
+            processing included integrated data.
+            Additional inputs:
      - 3 x .html outputs named of the star transect tables (3 per site)
         naming convention applies (i.e. 'BKE23A_Transect1_.html')
 
@@ -176,7 +192,7 @@ def main_routine():
     remote_desktop = cmd_args.remote_desktop
     veg_list_excel = cmd_args.veg_list_excel
     shrub_list_excel = cmd_args.shrub_list_excel
-    #shrub_list_excel = r"C:\Users\admrmcgr\PycharmProjects\20210330_0807\20210323_1308\dominantVegSplitDistricts2.xlsx"
+    pastoral_estate = cmd_args.pastoral_estate
 
     # create an empty list
     located_list = []
@@ -187,26 +203,26 @@ def main_routine():
     # call the odk_export_csv_checker_fn function - search for star transect outputs
     file_path = odk_export_csv_checker_fn(directory_odk, located_list, 'RM_Star_Transect_results.csv',
                               temp_dir,
-                              veg_list_excel, shrub_list_excel)
+                              veg_list_excel, shrub_list_excel, pastoral_estate)
 
     # call the odk_export_csv_checker_fn function - search for star integrated outputs
     file_path = odk_export_csv_checker_fn(directory_odk, located_list, 'RMB_Integrated_Site_results.csv',
                               temp_dir,
-                              veg_list_excel, shrub_list_excel)
+                              veg_list_excel, shrub_list_excel, pastoral_estate)
 
     # call the odk_export_csv_checker_fn function - search for basal sweep outputs
     file_path = odk_export_csv_checker_fn(directory_odk, located_list, 'RMB_Basal_Sweep_results.csv', temp_dir,
-                              veg_list_excel, shrub_list_excel)
+                              veg_list_excel, shrub_list_excel, pastoral_estate)
 
     # call the odk_export_csv_checker_fn function - search for woody thickening outputs
     file_path = odk_export_csv_checker_fn(directory_odk, located_list, 'RMB_Woody_Thickening_results.csv',
                               temp_dir,
-                              veg_list_excel, shrub_list_excel)
+                              veg_list_excel, shrub_list_excel, pastoral_estate)
 
     # call the odk_export_csv_checker_fn function - search for ras outputs
     file_path = odk_export_csv_checker_fn(directory_odk, located_list, 'RMB_Rapid_Assessment_RAS_results.csv',
                               temp_dir,
-                              veg_list_excel, shrub_list_excel)
+                              veg_list_excel, shrub_list_excel, pastoral_estate)
 
     print('''====================================================''')
 

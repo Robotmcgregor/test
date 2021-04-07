@@ -180,15 +180,15 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
 
             cond_hor_list1 = []
 
-        basalCsv = os.path.join(site_dir, site + '_clean_basal.csv')
-        print(basalCsv)
-        if os.path.isfile(basalCsv):
+        basal_csv = os.path.join(site_dir, site + '_clean_basal.csv')
+        print(basal_csv)
+        if os.path.isfile(basal_csv):
 
             print('clean_basal.csv exists.')
             # call the step8_3_site_basal_sweep_data_extraction.py script.
             import step8_3_site_basal_sweep_data_extraction
             basal_hor_list1234, basal_vert_list123 = step8_3_site_basal_sweep_data_extraction.main_routine(
-                basalCsv, site, site_dir, shrub_list_excel)
+                basal_csv, site, site_dir, shrub_list_excel)
 
         else:
 

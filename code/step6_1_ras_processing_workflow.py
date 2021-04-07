@@ -241,13 +241,14 @@ def prop_code_extraction_fn(estate_series, property_name, site):
     return prop_code, code_site
 
 
-def main_routine(file_path, temp_dir, veg_list_excel):
+def main_routine(file_path, temp_dir, veg_list_excel, pastoral_estate):
     """ Control the ras data extraction workflow producing two outputs.
 
             :param file_path: string object containing the dir_path concatenated with search_criteria.
             :param temp_dir: string object path to the created output directory (date_time).
             :param veg_list_excel: string object containing the path to an excel document containing botanical and
             common names.
+            :param pastoral_estate: string object containing the file path to the pastoral estate shapefile.
             :return clean_star_transect.csv: clean csv file output to the command argument export directory.
             :return clean_ras.csv.csv:  csv file containing photo url information to the command argument export
             directory.
@@ -255,9 +256,6 @@ def main_routine(file_path, temp_dir, veg_list_excel):
             - contains all information."""
 
     print('step6_1_ras_processing_workflow.py INITIATED.')
-
-    # import the pastoral estate shapefile to extract prop_tag
-    estate_path = (r"Z:\Scratch\Rob\shapefiles\pastoral_estate.shp")#todo add to command args
 
     # Read in the star transect csv as  a Pandas DataFrame.
     df = pd.read_csv(file_path)
@@ -286,8 +284,9 @@ def main_routine(file_path, temp_dir, veg_list_excel):
         site = location_list[4:][0]
 
         # read in the estate shapefile and create series
-        estate = gpd.read_file(estate_path)
+        estate = gpd.read_file(pastoral_estate)
         estate_series = estate[['PROPERTY', 'PROP_TAG']]
+        print(estate_series)
 
         # extract the final property value
         final_prop = location_list[3:4][0]

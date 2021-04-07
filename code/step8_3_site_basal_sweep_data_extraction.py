@@ -149,7 +149,7 @@ def main_routine(basal_csv, site, site_dir, shrub_list_excel):
 
     # call the commonNameExtraction FN function
     basal_species_list1, basal_ver_list4 = common_name_extraction_fn(tree_series, basal_vert_list123[1], 'Tree')
-
+    print('Tree basal: ', basal_species_list1, basal_ver_list4)
     # call the common_name_extraction_fn function
     basal_species_list2, basal_ver_list5 = common_name_extraction_fn(shrub_series, basal_vert_list123[2], 'Shrub')
 
