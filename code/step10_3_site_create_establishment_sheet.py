@@ -176,6 +176,7 @@ def insert_vertical_data_fn(worksheet, row, col, input_list, style, factor):
     if input_list[0]:
         # Iterate over the data and write it out row by row.
         for item in input_list:
+            print(item)
             worksheet.write(row, col, item, style)
             row += factor
 
@@ -193,6 +194,7 @@ def insert_horizontal_data_fn(worksheet, row, col, input_list, style, factor):
     if input_list[0]:
         # Iterate over the data and write it out row by row.
         for item in input_list:
+            print(item)
             worksheet.write(row, col, item, style)
             col += factor
 
@@ -230,7 +232,6 @@ def main_routine(heading1, heading2, heading3, heading7, workbook, obs_data_list
 
     establishment_data_list = obs_data_list[0]
     if establishment_data_list[0]:
-        print('establishment_data_list: ', establishment_data_list)
         insert_vertical_data_fn(worksheet, 2, 1, establishment_data_list[0], heading7, 1)
     if establishment_data_list[1]:
         # call the insertDataFN function

@@ -57,7 +57,7 @@ def woody_list_vertical_fn(woody):
     return woody_vert_list12345678910
 
 
-def common_name_extraction_fn(botanical_series, target_list, form):
+'''def common_name_extraction_fn(botanical_series, target_list, form):
     """ Extract the common name from the botanical_common_series excel document.
 
             :param botanical_series: pandas series object containing common and botanical species names.
@@ -81,6 +81,38 @@ def common_name_extraction_fn(botanical_series, target_list, form):
 
         form_list.append(form)
         species_list.append([botanical_name, common_name])
+
+    return species_list, form_list'''
+
+
+def common_name_extraction_fn(botanical_series, target_list, form):
+    """ Extract the common name from the botanical_common_series excel document.
+
+            :param botanical_series: pandas series object containing common and botanical species names.
+            :param target_list: List of botanical species defined under basal_list_vertical_fn.
+            :param form: string object passed into the function (tree or shrub).
+            :return species_list: list object containing list elements [botanical_name, common_name].
+            :return form_list: list object containing the form identifier of each species. """
+
+    species_list = []
+    form_list = []
+
+    for botanical_name in target_list:
+        botanical_name_list = botanical_series.copyBotanical2.tolist()
+
+        if botanical_name != 'BLANK':
+
+            if botanical_name in botanical_name_list:
+
+                common_name = botanical_series.loc[botanical_series['copyBotanical2'] == botanical_name, 'copyCommon'].iloc[
+                    0]
+
+            else:
+                common_name = botanical_name
+
+                form_list.append(form)
+
+            species_list.append([botanical_name, common_name])
 
     return species_list, form_list
 
@@ -118,18 +150,13 @@ def main_routine(woody_csv, site, site_dir, shrub_list_excel):
     # call the commonNameExtraction FN function passing the tree botanical list
     woody_species_list1, woody_ver_list11 = common_name_extraction_fn(
         tree_series, woody_vert_list12345678910[8], 'Tree')
-    print(woody_species_list1, woody_ver_list11)
 
     # call the common_name_extraction_fn function passing the shrub botanical list
     woody_species_list2, woody_ver_list12 = common_name_extraction_fn(
         shrub_series, woody_vert_list12345678910[9], 'Shrub')
-    print(woody_species_list2, woody_ver_list12)
 
     # extend the woody_species_list1 containing all tree and shrub species and replace the list at woodyVerList[1]
     woody_species_list1.extend(woody_species_list2)
-    print('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[')
-    print(woody_species_list1)
-    print(type(woody_vert_list12345678910))
 
     # replace list position 1 in the woodyVerList list of lists.
     woody_vert_list12345678910[8] = woody_species_list1

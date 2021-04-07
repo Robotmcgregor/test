@@ -149,7 +149,6 @@ def main_routine(heading1, heading2, heading3, heading7, workbook, obs_data_list
         insert_vertical_data_fn(worksheet, 7, 1, visitDataList[1], heading7, 1)
 
     print('createVisitDetailsSheetP.py COMPLETE.')
-
     print('SCRIPT 5: createDisturbanceDetailsP.py initiating..........')
 
 

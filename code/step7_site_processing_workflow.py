@@ -145,7 +145,6 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
         # iterate through site_dir_path_list
         _, site = site_dir.rsplit('\\', 1)
         integrated_csv = os.path.join(site_dir, site + '_clean_integrated.csv')
-        # print(integrated_csv)
         if os.path.isfile(integrated_csv):
 
             print('clean_integrated.csv exists.')
@@ -163,7 +162,6 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
             cond_hor_list1 = []
 
         star_csv = os.path.join(site_dir, site + '_clean_star_transect.csv')
-        # print(star_csv)
         if os.path.isfile(star_csv):
             print('clean_star_transect.csv exists.')
             import step8_2_site_star_data_extraction
@@ -181,7 +179,6 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
             cond_hor_list1 = []
 
         basal_csv = os.path.join(site_dir, site + '_clean_basal.csv')
-        print(basal_csv)
         if os.path.isfile(basal_csv):
 
             print('clean_basal.csv exists.')
@@ -196,7 +193,6 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
             basal_vert_list123 = [[], [], []]
 
         woody_csv = os.path.join(site_dir, site + '_clean_woody_thick.csv')
-        # print(woody_csv)
         if os.path.isfile(woody_csv):
 
             print('clean_woody_thick.csv exists.')
@@ -232,7 +228,7 @@ def data_extraction_workflow_fn(directory_odk, site_dir_path_list, remote_deskto
             step8_8_site_ras_photo_download.main_routine(photo_ras_url_csv, site, site_dir)
         '''
         ras_csv = os.path.join(site_dir, site + '_clean_ras.csv')
-        # print(ras_csv)
+
         if os.path.isfile(ras_csv):
 
             print('cleanRas.csv exists.')

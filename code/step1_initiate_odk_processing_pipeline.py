@@ -38,9 +38,9 @@ def cmd_args_fn():
     p.add_argument('-d', '--directory_odk', help='The directory containing ODK csv files.',
                    default=r'C:\Users\robot\new_z_drive\20210325_0640\20210323_1308')
     p.add_argument('-x', '--export_dir', help='Directory path for outputs.',
-                   default=r'C:\Users\robot\new_z_drive\20210325_0640\20210323_1308\outputs')
+                   default=r'Z:\Scratch\Rob\chrome\chromedriver.exe')
     p.add_argument('-c', '--chrome_driver', help='File path for the chrome extension driver.',
-                   default=r"Z:\Scratch\Rob\chrome\chromedriver.exe")
+                   default=r"Z:\Scratch\Rob\chrome\20201117\chromedriver.exe")
     p.add_argument('-r', '--remote_desktop', help='Working on the remote_desktop? - Enter yes or No.',
                    default="Yes")
     p.add_argument('-v', '--veg_list_excel', help='Odk veg list Excel file path.',
@@ -70,7 +70,6 @@ def temporary_dir(export_dir):
     date_time_list_split = date_time_list[1].split(':')
     temp_dir = export_dir + '\\' + str(date_time_list[0]) + '_' \
                + str(date_time_list_split[0]) + str(date_time_list_split[1])
-    print('temp_dir: ', temp_dir)
     # check if the folder already exists - if False = create directory, if True = return error message zzzz.
     try:
         shutil.rmtree(temp_dir)
@@ -87,7 +86,6 @@ def temporary_dir(export_dir):
 def raw_odk_output_workflow_fn(file_path, search_criteria, temp_dir, veg_list_excel, pastoral_estate):
     """ Defines the script pathway depending on what raw ODK files are contained in the directory.
 
-            :param dir_path: string object containing the raw odk output csv files.
             :param file_path: string object containing the dir_path concatenated with search_criteria.
             :param search_criteria: string object containing the raw odk file name and type.
             :param temp_dir: string object path to the created output directory (date_time).
@@ -106,7 +104,7 @@ def raw_odk_output_workflow_fn(file_path, search_criteria, temp_dir, veg_list_ex
     elif search_criteria == 'RMB_Integrated_Site_results.csv':
 
         # call the step3_1_integrated_processing_workflow.py script.
-        print(file_path)
+
         import step3_1_integrated_processing_workflow
         step3_1_integrated_processing_workflow.main_routine(file_path, temp_dir)
 
@@ -143,7 +141,7 @@ def odk_export_csv_checker_fn(dir_path, located_list, search_criteria, temp_dir,
         :param pastoral_estate: string object containing the file path to the pastoral estate shapefile. """
 
     file_path = (dir_path + '\\' + search_criteria)
-    # print('file_path: ', file_path)
+
     if not os.path.exists(file_path):
         print(search_criteria, ' not located.')
         df = pd.DataFrame()

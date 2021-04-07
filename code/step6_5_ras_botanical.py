@@ -53,7 +53,6 @@ def extract_botanical_fn(row, string_clean_capital_fn, n):
 
         list_botanical.append(botanical)
 
-    print(list_botanical)
     return list_botanical
 
 
@@ -92,7 +91,6 @@ def grass_cover_fn(row, n):
         max_cover = '0'
 
     value = min_cover + '-' + max_cover
-    print(value)
 
     if value == '0 - 0':
         value = '0'
@@ -134,7 +132,6 @@ def main_routine(clean_list, row, string_clean_capital_fn):
 
         # extend the final list of grass species
         list_grass_botanical.extend([botanical1, botanical2, botanical3, botanical4])
-        print(list_grass_botanical)
 
     variable_list = ['PPP', 'PG', 'AG', 'FB']
     cover_grass_list = []
@@ -142,8 +139,6 @@ def main_routine(clean_list, row, string_clean_capital_fn):
     for i in variable_list:
         value = grass_cover_fn(row, str(i))
         grass_cover_string_list.extend([value])
-    print(cover_grass_list)
-    print(grass_cover_string_list)
 
     # extend clean_list with results
     clean_list.extend(list_grass_botanical)

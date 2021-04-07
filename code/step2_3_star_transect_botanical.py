@@ -113,19 +113,16 @@ def botanical_extraction_fn(string_clean_capitalize_fn, match_list, input_name_l
         # insert if else statement regarding Whitegrass !!!!!!!!!!#todo whitegrass statement
 
         if any(clean_name in x for x in match_list):
-            # print('Yes')
             list_botanical_match.append(clean_name)
             list_cover_match.append(cover)
             list_botanical_no_match.append('Nan')
             list_cover_no_match.append(9999.0)
 
         else:
-            # print('false')
             list_botanical_no_match.append(clean_name)
             list_cover_no_match.append(cover)
             list_botanical_match.append('Nan')
             list_cover_match.append(9999.0)
-    # print(list_botanical_match, list_botanical_no_match, list_cover_match, list_cover_no_match)
     return list_botanical_match, list_botanical_no_match, list_cover_match, list_cover_no_match
 
 
@@ -200,10 +197,8 @@ def main_routine(clean_list, row, string_clean_capital_fn, veg_list_excel):
         string_clean_capital_fn, cleaned3p_list, botanical_name_list, cover_list)
 
     list3p_cover_sorted_nan, list3p_species_sorted = sort_two_lists(list_botanical3p, list3p_cover)
-    print(list3p_cover_sorted_nan, list3p_species_sorted)
 
     list_pg_cover_sorted_nan, list_pg_species_sorted = sort_two_lists(list_botanical_pg, list_pg_cover)
-    print(list_pg_cover_sorted_nan, list_pg_species_sorted)
 
     # append all values to the cleaned values to the list (clean_list)
     clean_list.extend(list3p_species_sorted)
@@ -233,10 +228,8 @@ def main_routine(clean_list, row, string_clean_capital_fn, veg_list_excel):
         string_clean_capital_fn, cleaned_af_list, botanical_name_list, cover_list)
 
     list_af_cover_sorted_nan, list_af_species_sorted = sort_two_lists(list_botanical_af, list_af_cover)
-    print(list_af_cover_sorted_nan, list_af_species_sorted)
 
     list_pf_cover_sorted_nan, list_pf_species_sorted = sort_two_lists(list_botanical_pf, list_pf_cover)
-    print(list_pf_cover_sorted_nan, list_pf_species_sorted)
 
     # append all values to the cleaned values to the list (clean_list)
     clean_list.extend(list_pf_species_sorted)
@@ -244,20 +237,13 @@ def main_routine(clean_list, row, string_clean_capital_fn, veg_list_excel):
     clean_list.extend(list_af_species_sorted)
     clean_list.extend(list_af_cover_sorted_nan)
 
-    print(list_af_cover_sorted_nan)
-
     veg_list = []
-    print('list_af_cover_sorted_nan count np.nan: ', list_af_cover_sorted_nan.count(np.nan))
-    print('list_af_cover_sorted_nan count: None', list_af_cover_sorted_nan.count(None))
 
     represent_veg = str(
         row['SITE_VEG_FRACTIONS:VEG_COVER_ADJUST'])  # TODO check that the values are correct as no representative data
     if list_af_cover_sorted_nan.count(np.nan) > 0 and represent_veg == 'representative':
-        print('list_af_cover_sorted_nan: NOT Empty line 161')
         while np.nan in list_af_cover_sorted_nan:
             list_af_cover_sorted_nan.remove(np.nan)
-
-        print(list_af_cover_sorted_nan)
 
         total = float(0.0)
 
@@ -267,7 +253,6 @@ def main_routine(clean_list, row, string_clean_capital_fn, veg_list_excel):
             total = total + list_af_cover_sorted_nan[ele]
 
         represent_veg = str(row['SITE_VEG_FRACTIONS:VEG_COVER_ADJUST'])
-        print('represent_veg: ', represent_veg)
 
         rep_veg = 'amended - annual forb'
 
@@ -280,12 +265,12 @@ def main_routine(clean_list, row, string_clean_capital_fn, veg_list_excel):
         adj_veg_total = float(row['SITE_COVER_FRACTIONS:TOTAL_COVER'])
         final_veg_total = float(row['SITE_COVER_FRACTIONS:TOTAL_COVER'])
 
-        veg_list = [rep_veg, adj_perennial, adj_perennial, adj_annual, adj_p_forb, field_a_forb, adj_a_forb,
+        veg_list = [rep_veg, adj_perennial, adj_annual, adj_p_forb, field_a_forb, adj_a_forb,
                     final_a_forb, adj_veg_total, final_veg_total]
 
         """veg_list = [rep_veg, adj_perennial, adj_perennial, adj_annual, adj_p_forb, adj_a_forb, adj_veg_total, 
                     final_veg_total]"""
-        # todo why is this list shorter than th else statement?
+        # todo why is this list shorter than the else statement?
 
     else:
         print('list_af_cover_sorted_nan: EMPTY')
@@ -301,7 +286,7 @@ def main_routine(clean_list, row, string_clean_capital_fn, veg_list_excel):
         adj_veg_total = float(row['SITE_VEG_FRACTIONS:VEG_ADJ'])
         final_veg_total = float(row['SITE_VEG_FRACTIONS:VEG_ADJ'])
 
-        veg_list = [rep_veg, adj_perennial, adj_perennial, adj_annual, adj_p_forb, field_a_forb, adj_a_forb,
+        veg_list = [rep_veg, adj_perennial,  adj_annual, adj_p_forb, field_a_forb, adj_a_forb,
                     final_a_forb, adj_veg_total, final_veg_total]
 
     print('step2_3_star_transect_botanical.py COMPLETED')

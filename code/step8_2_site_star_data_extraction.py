@@ -117,19 +117,20 @@ def ground_composition_ver_list_fn(star):
                               (round(float(star.field_ag[0]) * float(star.final_veg[0]) / 100)),
                               (round(float(star.field_pf[0]) * float(star.final_veg[0]) / 100)),
                               (round(float(star.field_af[0]) * float(star.final_veg[0]) / 100)), 0,
-                              round(star.field_veg_total[0]), round(star.field_litter[0]), round(star.field_exposed[0])]
+                              round(star.field_veg[0]), round(star.field_litter[0]), round(star.field_exposed[0])]
     ground_layer_ver_list3 = [round(star.field_pg[0]), round(star.field_ag[0]), round(star.field_pf[0]),
                               round(star.field_af[0]), 0]
     ground_layer_ver_list4 = [(round(float(star.final_pg[0]) * float(star.final_veg[0]) / 100)),
                               (round(float(star.final_ag[0]) * float(star.final_veg[0]) / 100)),
                               (round(float(star.final_pf[0]) * float(star.final_veg[0]) / 100)),
                               (round(float(star.final_af[0]) * float(star.final_veg[0]) / 100)), 0,
-                              round(star.final_veg_total[0]), round(star.final_litter[0]), round(star.final_exposed[0])]
+                              round(star.final_veg[0]), round(star.final_litter[0]), round(star.final_exposed[0])]
     ground_layer_ver_list5 = [round(star.final_pg[0]), round(star.final_ag[0]), round(star.final_pf[0]),
                               round(star.final_af[0]), 0]
 
     ground_vert_list12345 = [ground_layer_ver_list1, ground_layer_ver_list2, ground_layer_ver_list3,
                              ground_layer_ver_list4, ground_layer_ver_list5]
+
     return ground_vert_list12345
 
 
@@ -143,6 +144,7 @@ def site_cover_estimates_fn(star):
     if star.rep_cover[0] == 'representative':
 
         estimates_hor_list1 = [star.field_litter[0], star.field_exposed[0], star.field_veg[0], star.field_site_total[0]]
+        print(']]]]]]]]]]]]]]]]]]]]]]]]estimates_hor_list1', estimates_hor_list1)
         estimates_hor_list2 = [0, 0, 0, 0, 0]
         estimates_hor_list3 = [star.field_pg[0], star.field_ag[0], star.field_pf[0], star.field_af[0]]
         estimates_hor_list4 = [star.adj_pg[0], star.adj_ag[0], star.adj_pf[0], star.adj_af[0]]
@@ -152,6 +154,7 @@ def site_cover_estimates_fn(star):
     else:
 
         estimates_hor_list1 = [star.field_litter[0], star.field_exposed[0], star.field_veg[0], star.field_site_total[0]]
+        print(']]]]]]]]]]]]]]]]]]]]]]]]estimates_hor_list1', estimates_hor_list1)
         estimates_hor_list2 = [star.adj_litter[0], star.adj_exposed[0], star.adj_veg[0], star.adj_site_total[0]]
         estimates_hor_list3 = [star.field_pg[0], star.field_ag[0], star.field_pf[0], star.field_af[0]]
         estimates_hor_list4 = [star.adj_pg[0], star.adj_ag[0], star.adj_pf[0], star.adj_af[0]]
@@ -160,6 +163,8 @@ def site_cover_estimates_fn(star):
 
     estimates_hor_list12345 = [estimates_hor_list1, estimates_hor_list2, estimates_hor_list3, estimates_hor_list4,
                                estimates_hor_list5]
+
+    print('PPPPPPPPPPPPPPPPPPP estimates_hor_list12345', estimates_hor_list12345)
     return estimates_hor_list12345
 
 
@@ -291,8 +296,6 @@ def common_name_extraction_fn(botanical_series, target_list):
 
     species_list = []
 
-    print('Target_list: ', target_list)
-
     for botanical_name in target_list:
         botanical_name_list = botanical_series.copyBotanical2.tolist()
         if botanical_name in botanical_name_list:
@@ -305,7 +308,6 @@ def common_name_extraction_fn(botanical_series, target_list):
 
         species_list.append([botanical_name, common_name])
 
-    print(species_list)
     return species_list
 
 

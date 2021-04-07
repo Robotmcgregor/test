@@ -368,9 +368,9 @@ def main_routine(color_fill, heading1, heading2, heading3, heading4, heading6, h
 
     # call the define_column_widths_fn(workbook) function
     workbook, worksheet = define_column_widths_fn(workbook, worksheet)
-    print('ras_data_list: ', ras_data_list)
+
     if ras_data_list[0]:
-        print("ras_data_list: ", ras_data_list)
+
         # call the insert_horizontal_data_fn function and inset station name.
         insert_horizontal_data_fn(worksheet, 2, 1, ras_data_list[0][:1], heading7, 1)
         # call the insert_horizontal_data_fn function and inset site and datetime information.
@@ -391,77 +391,77 @@ def main_routine(color_fill, heading1, heading2, heading3, heading4, heading6, h
         insert_horizontal_data_fn(worksheet, 6, 1, ras_data_list[4], heading7, 4)
     if ras_data_list[5]:
         # call the insert_horizontal_data_fn function and insert bare soil information.
-        print('ras_data_list[5]: ', ras_data_list[5])
+
         insert_horizontal_data_fn(worksheet, 7, 1, ras_data_list[5], heading7, 1)
 
     if ras_data_list[6]:
         # call the insert_horizontal_data_fn function and insert bare soil information.
-        print('ras_data_list[6]: ', ras_data_list[6])
+
         insert_horizontal_data_fn(worksheet, 10, 1, ras_data_list[6], heading7, 1)
 
     if ras_data_list[7]:
         # call the insert_vertical_data_fn function to insert the 3p grass information.
-        print('ras_data_list[7]: ', ras_data_list[7])
+
         insert_vertical_data_fn(worksheet, 11, 1, ras_data_list[7], heading7, 1)
 
     if ras_data_list[8]:
         # call the insert_vertical_data_fn function to insert the perennial grass information.
-        print('ras_data_list[5]: ', ras_data_list[8])
+
         insert_vertical_data_fn(worksheet, 11, 2, ras_data_list[8], heading7, 1)
 
     if ras_data_list[9]:
         # call the insert_vertical_data_fn function to insert the annual grass information.
-        print('ras_data_list[9]: ', ras_data_list[9])
+
         insert_vertical_data_fn(worksheet, 11, 3, ras_data_list[9], heading7, 1)
 
     if ras_data_list[10]:
         # call the insert_vertical_data_fn function to insert the forb information.
-        print('ras_data_list[10]: ', ras_data_list[10])
+
         insert_vertical_data_fn(worksheet, 11, 4, ras_data_list[10], heading7, 1)
 
     if ras_data_list[11]:
         # call the insert_horizontal_data_fn function to insert the max and min totals.
-        print('ras_data_list[11]: ', ras_data_list[11])
+
         insert_horizontal_data_fn(worksheet, 10, 6, ras_data_list[11], heading7, 1)
 
     if ras_data_list[12]:
         # call the insert_horizontal_data_fn function to insert the basal information.
-        print('ras_data_list[12]: ', ras_data_list[12])
+
         insert_horizontal_data_fn(worksheet, 16, 1, ras_data_list[12], heading7, 1)
 
     if ras_data_list[13]:
         # call the insert_horizontal_data_fn function to insert the juvenile density information.
-        print('ras_data_list[13]: ', ras_data_list[13])
+
         insert_horizontal_data_fn(worksheet, 18, 1, ras_data_list[13], heading7, 3)
 
     if ras_data_list[14]:
         # call the insert_vertical_data_fn function to insert the forb information.
-        print('ras_data_list[14]: ', ras_data_list[14])
+
         insert_vertical_data_fn(worksheet, 19, 1, ras_data_list[14], heading7, 1)
 
     if ras_data_list[15]:
         # call the insert_vertical_data_fn function to insert the forb information.
-        print('ras_data_list[15]: ', ras_data_list[15])
+
         insert_vertical_data_fn(worksheet, 19, 4, ras_data_list[15], heading7, 1)
 
     if ras_data_list[16]:
         # call the  insert_horizontal_data_fn function to insert the erodible soil information.
-        print('ras_data_list[16]: ', ras_data_list[16])
+
         insert_horizontal_data_fn(worksheet, 27, 1, ras_data_list[16], heading7, 1)
 
     if ras_data_list[17]:
         # call the insert_vertical_data_fn function to insert erosion severity information.
-        print('ras_data_list[17]: ', ras_data_list[17])
+
         insert_vertical_data_fn(worksheet, 29, 1, ras_data_list[17], heading7, 1)
 
     if ras_data_list[18]:
         # call the insert_vertical_data_fn function to insert erosion severity information.
-        print('ras_data_list[18]: ', ras_data_list[18])
+
         insert_vertical_data_fn(worksheet, 29, 2, ras_data_list[18], heading7, 1)
 
         #todo erosion comment not functioning
         erosion_comment = ['BLANK', 'BLANK', 'BLANK', 'BLANK', 'BLANK']
-        print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')#todo the erosion comment is not functioning properly.
+        #todo the erosion comment is not functioning properly.
         print('ras_data_list[18]: ', ras_data_list[18])
         for i in ras_data_list[18]:
             print('ras_data_list[18]: ', ras_data_list[18])
@@ -476,17 +476,17 @@ def main_routine(color_fill, heading1, heading2, heading3, heading4, heading6, h
 
     if ras_data_list[20]:
         # call the  insert_horizontal_data_fn function to insert pasture utilisation information.
-        print('ras_data_list[20]: ', ras_data_list[20])
+
         insert_horizontal_data_fn(worksheet, 34, 1, ras_data_list[20], heading7, 1)
 
     if ras_data_list[21]:
         # call the  insert_horizontal_data_fn function to insert weed comment.
-        print('ras_data_list[21]: ', ras_data_list[21])
+
         insert_horizontal_data_fn(worksheet, 35, 1, ras_data_list[21], heading7, 1)
 
     if ras_data_list[22]:
         # call the  insert_horizontal_data_fn function to insert feral animal true or false.
-        print('ras_data_list[22]: ', ras_data_list[22])
+
         insert_horizontal_data_fn(worksheet, 37, 1, ras_data_list[22], heading7, 1)
 
     if ras_data_list[23]:
@@ -495,22 +495,22 @@ def main_routine(color_fill, heading1, heading2, heading3, heading4, heading6, h
         else:
             weed_comment = 'BLANK'
             # call the  insert_horizontal_data_fn function to insert weed comment.
-            print('ras_data_list[23]: ', ras_data_list[23])
+
             insert_horizontal_data_fn(worksheet, 38, 1, [weed_comment], heading7, 1)
 
     if ras_data_list[24]:
         # call the insert_vertical_data_fn function to insert northern fire information.
-        print('ras_data_list[24]: ', ras_data_list[24])
+
         insert_vertical_data_fn(worksheet, 41, 1, ras_data_list[24], heading7, 1)
 
     if ras_data_list[25]:
         # call the insert_vertical_data_fn function to insert southern fire information.
-        print('ras_data_list[25]: ', ras_data_list[25])
+
         insert_vertical_data_fn(worksheet, 41, 4, ras_data_list[25], heading7, 1)
 
     if ras_data_list[26][:1]:
         # call the  insert_horizontal_data_fn function to insert land condition.
-        print('ras_data_list[26][:1]: ', ras_data_list[26][:1])
+
         insert_horizontal_data_fn(worksheet, 45, 1, ras_data_list[26][:1], heading7, 1)
 
         if ras_data_list[26][:1][0] == 'A':
@@ -527,7 +527,7 @@ def main_routine(color_fill, heading1, heading2, heading3, heading4, heading6, h
 
     if ras_data_list[26][1:]:
         # call the  insert_horizontal_data_fn function to insert land condition.
-        print('ras_data_list[26][1:]: ', ras_data_list[26][1:])
+
         insert_horizontal_data_fn(worksheet, 46, 1, ras_data_list[26][1:], heading7, 1)
 
     # -------------------------- Remove if tree and shrub increase to 6 options ------------------

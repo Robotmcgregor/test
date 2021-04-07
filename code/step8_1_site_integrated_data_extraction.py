@@ -197,7 +197,6 @@ def weeds_comment_fn(inter):
                 comment1 = weed + ': ' + 'density(' + str(den) + ') size(' + str(size) + ') - ' + com
             else:
                 comment1 = weed + ': ' + 'density(' + str(den) + ') size(' + str(size) + ')'
-            # print(comment1)
             weed_comment_list.append(comment1)
         else:
             print('No records', weed)
@@ -317,6 +316,11 @@ def site_cond_variable_list_fn(inter):
      :return cond_vert_list12: list object containing condition sheet vertical inserts,
      including: greeness, abundance, and pasture utilisation information.
      :return cond_hor_list1: list object containing condition sheet horizontal insert (condition note). """
+
+    cond_values = {'no_grazing': 'NO GRAZING', '<10%': '<10%', '11_25%': '11%-25%', '26_50%': '26%-50%',
+                     '51_75%': '51%-75%', '76_90%': '76%-90%', '>90%': '>90%', 'green': 'GREEN',
+                     'drying_off_greening_up': 'DRYING OFF/GREENING UP', 'dry': 'DRY'}
+
 
     cond_ver_list1 = [inter.greenness[0], inter.green_comm[0], inter.abundance[0], inter.abund_comm[0],
                       inter.past_util[0], inter.past_util_comm[0]]

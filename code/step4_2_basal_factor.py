@@ -54,7 +54,6 @@ def basal_position_fn(row):
         list_a = [basal, dead_tree, live_tree, dead_shrub, live_shrub]
         basal_list.extend(list_a)
 
-    print(basal_list)
     return basal_list
 
 
@@ -65,15 +64,12 @@ def basal_calc_odk_fn(row):
             :return basal_totals_list: list object containing three basal totals per site."""
 
     basal_tree = float(row['BA_ADULT_TREES'])
-    # print('basal_tree: ', basal_tree)
     basal_shrub = float(row['BA_ADULT_SHRUBS'])
-    # print('basal_shrub: ', basal_shrub)
 
     total_basal = basal_tree + basal_shrub
 
     basal_totals_list = [basal_tree, basal_shrub, total_basal]
 
-    print(basal_totals_list)
     return basal_totals_list
 
 

@@ -92,7 +92,6 @@ def main_routine(clean_list, row, site_code):
 
     # extend the photo_url_list to the clean_list excluding the site variable [1:]
     clean_list.extend(photo_url_list[1:])
-    print('clean_list: ', clean_list)
 
     print('step6_6_ras_photos.py COMPLETED.')
 

@@ -88,19 +88,16 @@ def search_html_files_fn(directory_odk, site):
     """ Search for all html files within a directory. """
     # create an empty list
     html_list = []
-    print(site)
 
     for file in glob.glob(directory_odk + '//' + site + '_transect?.html'):
         # append file paths to list
         html_list.append(file)
-    print('html_list: ', html_list)
 
     return html_list
 
 
 def move_html_files(html_list, site, site_dir):
     for i in html_list:
-        # print('i:', i)
         _, file = i.rsplit('\\', 1)
         # print('file: ', file)
 
@@ -128,10 +125,6 @@ def main_routine(directory_odk, obs_data_list, site, site_dir, star):
     # call the step10_1_site_observation_sheet_processing_workflow.py script.
     import step10_1_site_observation_sheet_processing_workflow
     step10_1_site_observation_sheet_processing_workflow.main_routine(obs_data_list, site, site_dir, star)
-
-    # chrome_driver = r"Z:\Scratch\Rob\chrome\chromedriver.exe"
-    # call the odk_aggregate_log_in_fn function.
-    # driver = odk_aggregate_log_in_fn(chrome_driver)
 
 
 if __name__ == "__main__":

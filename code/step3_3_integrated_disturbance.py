@@ -38,7 +38,6 @@ def disturbance_fn(row):
         dist = str(row['GROUP_PHOTOS:DEST' + str(i + 1)])
         dist_list.append(dist)
 
-    print('photo_list: ', dist_list)
     return dist_list
 
 
@@ -96,7 +95,6 @@ def clearing_fn(row, string_clean_capital_fn):
     clear_pdk = string_clean_capital_fn(str(row['CLEARING:PDK_NAME']))
 
     land_use = string_clean_capital_fn(str(row['CLEARING:LAND_USE']))
-    # print('land_use: ', land_use)
     if land_use == 'other':
         land_use = land_use.replace('other', string_clean_capital_fn(str(row['CLEARING:LU_OTHER'])))
 
@@ -134,7 +132,6 @@ def feral_extraction_fn(row, string_clean_capital_fn):
         str(i + 1)
         feral = string_clean_capital_fn(str(row['GROUP_FERAL:FERAL' + str(i + 1)]))
         feral_list.append(feral)
-        print(feral)
         feral_evid = string_clean_capital_fn(str(row['GROUP_FERAL:FERAL' + str(i + 1) + '_EVID']))
         feral_evid_list.append(feral_evid)
 
@@ -307,19 +304,15 @@ def fire_fn(row):
 
     value = str(row['FIRE:NORTH_FF'])
     north_ff = (north_ff_values[value])
-    print(north_ff)
 
     value = str(row['FIRE:NORTH_FI'])
     north_fi = (north_fi_values[value])
-    print(north_fi)
 
     value = str(row['FIRE:SOUTH_FF'])
     south_ff = (south_ff_values[value])
-    print(south_ff)
 
     value = str(row['FIRE:SOUTH_FI'])
     south_fi = (south_fi_values[value])
-    print(south_fi)
 
     fire_list = [north_ff, north_fi, south_ff, south_fi]
     return fire_list
@@ -370,7 +363,6 @@ def main_routine(clean_list, row, string_clean_capital_fn):
 
     # call the pres_abs_disturbance_fn function
     dist_pa_list = pres_abs_disturbance_fn(dist_class_list)
-    # print("pres_abs_disturbance_fn function complete.")
 
     # call the clearing_fn function
     clearing_list = clearing_fn(row, string_clean_capital_fn)
