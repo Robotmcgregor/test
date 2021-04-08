@@ -106,7 +106,6 @@ def recorder_fn(row):
         recorder = recorder.replace('other', str((row['OFFICER_ONE:OTHER_RECORDER'])))
     # clean variable, remove white space and possible typos
     recorder = string_clean_title_fn(recorder)
-    # print(recorder)
     first, second = recorder.split(' ')
     obs_recorder = second + ', ' + first
 
@@ -123,7 +122,6 @@ def estimator_fn(row):
     if estimator == 'other':
         estimator = estimator.replace('other', str((row['OFFICER_TWO:OTHER_ESTIMATOR'])))
     estimator = string_clean_title_fn(estimator)
-    # print(estimator)
     first, second = estimator.split(' ')
     obs_estimator = second + ', ' + first
 

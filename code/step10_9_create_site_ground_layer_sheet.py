@@ -169,26 +169,35 @@ def main_routine(color_fill, heading1, heading4, heading7,
     workbook, worksheet = define_column_widths_fn(workbook, worksheet)
 
     cover_data_list = obs_data_list[5]
-    # print('cover_data_list: ', cover_data_list)
+
 
     if cover_data_list[0]:
+
         # call the insertDataFN function
         insert_vertical_data_fn(worksheet, 2, 2, cover_data_list[0], heading7, 1)
     if cover_data_list[1]:
+
         # call the insertDataFN function
+        #string_ints = [str(int) for int in cover_data_list[1]]#todo delete these when ready.
         insert_vertical_data_fn(worksheet, 5, 1, cover_data_list[1], heading7, 1)
     if cover_data_list[2]:
+
+        #string_ints = [str(int) for int in cover_data_list[2]]
         # call the insertDataFN function
         insert_vertical_data_fn(worksheet, 5, 2, cover_data_list[2], heading7, 1)
     if cover_data_list[3]:
+
+        #string_ints = [str(int) for int in cover_data_list[3]]
         # call the insertDataFN function
         insert_vertical_data_fn(worksheet, 5, 3, cover_data_list[3], heading7, 1)
     if cover_data_list[4]:
+
+        #string_ints = [str(int) for int in cover_data_list[4]]
         # call the insertDataFN function
         insert_vertical_data_fn(worksheet, 5, 4, cover_data_list[4], heading7, 1)
 
     print('step10_9_create_site_ground_layer.py COMPLETE.')
-    print('SCRIPT 12: createCoverEstimatesSheetP.py initiating..........')
+    print('step10_10_create_site_cover_estimates.py initiating..........')
 
 
 if __name__ == '__main__':

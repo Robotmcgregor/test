@@ -59,7 +59,6 @@ def cattle_pads_fn(row, string_clean_capital_fn):
     cattle_tramp = string_clean_capital_fn(str(row['CATTLE:CATTLE_TRAMP']))
 
     cattle_list = [cattle_pad, cattle_tramp]
-    print('cattle list', cattle_list)
     return cattle_list
 
 
@@ -91,6 +90,17 @@ def pasture_fn(row, string_clean_capital_fn):
     return output_list
 
 
+def capitalizeFunc(free_text):
+    """
+    :param free_text: string object created from free text 255 characters.
+    :return clean_text: processed string object.
+    """
+    sent_list = free_text.split('. ')
+    clean_text = (". ".join((i.capitalize() for i in sent_list)))
+
+    return clean_text
+
+
 def condition_fn(row, string_clean_capital_fn):
     """ Extract the condition score information.
 
@@ -101,9 +111,11 @@ def condition_fn(row, string_clean_capital_fn):
     condition = string_clean_capital_fn(
         str(row['CONDITION:CONDITION_SCORE']))
     cond_note = string_clean_capital_fn(str(row['CONDITION:VISIT_NOTES']))
+    cond_note2 = capitalizeFunc(cond_note)
+    '. '.join(x.strip().capitalize() for x in cond_note.split('.'))  # todo use this for all free text
     dev_note = string_clean_capital_fn(str(row['CONDITION:DEV_NOTE']))
 
-    condition_list = [condition, cond_note, dev_note]
+    condition_list = [condition, cond_note2, dev_note]
     return condition_list
 
 

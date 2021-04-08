@@ -106,7 +106,6 @@ def recorder_fn(row):
         recorder = recorder.replace('other', str((row['OFFICER_ONE:OTHER_RECORDER'])))
     # clean variable, remove white space and possible typos
     recorder = string_clean_title_fn(recorder)
-    # print(recorder)
     first, second = recorder.split(' ')
     obs_recorder = second + ', ' + first
 
@@ -124,7 +123,6 @@ def estimator_fn(row):
     if estimator == 'other':
         estimator = estimator.replace('other', str((row['OFFICER_TWO:OTHER_ESTIMATOR'])))
     estimator = string_clean_title_fn(estimator)
-    # print(estimator)
     first, second = estimator.split(' ')
     obs_estimator = second + ', ' + first
 
@@ -251,7 +249,6 @@ def main_routine(file_path, temp_dir):
 
         # call the gps_points_fn function to extract the longitude and latitude information.
         lat_lon_list = gps_points_fn(row)
-        # print("gpsPoints function complete.")
 
         # call the meta_date_fn function to extract the unique identifier information for each form record.
         meta_data_list = meta_data_fn(row)
@@ -293,7 +290,6 @@ def main_routine(file_path, temp_dir):
         final_clean_list.append(clean_list)
         final_photo_url_list.append(photo_url_list)
 
-    # print(final_int_clean_list)
 
     integrated_df = pd.DataFrame(final_clean_list)
     integrated_df.columns = [

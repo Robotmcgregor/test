@@ -78,7 +78,6 @@ def basal_list_vertical_fn(basal):
 
     basal_ver_list2 = [basal.bot_ts1[0], basal.bot_ts2[0], basal.bot_ts3[0], basal.bot_ts4[0],
                        basal.bot_ts5[0]]
-    # print('treeNameList: ', treeNameList)
     basal_ver_list3 = [basal.bot_sb1[0], basal.bot_sb2[0], basal.bot_sb3[0], basal.bot_sb4[0],
                        basal.bot_sb5[0]]
 
@@ -100,18 +99,29 @@ def common_name_extraction_fn(botanical_series, target_list, form):
 
     for botanical_name in target_list:
         botanical_name_list = botanical_series.copyBotanical2.tolist()
-        if botanical_name in botanical_name_list:
 
-            common_name = botanical_series.loc[botanical_series['copyBotanical2'] == botanical_name, 'copyCommon'].iloc[
-                0]
+        if botanical_name != 'BLANK':
 
-        else:
-            common_name = botanical_name
+            if botanical_name in botanical_name_list:
 
-        form_list.append(form)
-        species_list.append([botanical_name, common_name])
+                common_name = botanical_series.loc[botanical_series['copyBotanical2'] == botanical_name, 'copyCommon'].iloc[
+                    0]
+            else:
+                common_name = botanical_name
+
+            form_list.append(form)
+
+            species_list.append([botanical_name, common_name])
 
     return species_list, form_list
+
+
+'''def sort_three_lists(lista, listb, listc):
+
+    lista, listb, listc = zip(*sorted(zip(lista, listb, listc)))
+    print('||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||')
+    print(lista, listb, listc)
+    return lista, listb, listc'''
 
 
 def main_routine(basal_csv, site, site_dir, shrub_list_excel):
@@ -149,7 +159,10 @@ def main_routine(basal_csv, site, site_dir, shrub_list_excel):
 
     # call the commonNameExtraction FN function
     basal_species_list1, basal_ver_list4 = common_name_extraction_fn(tree_series, basal_vert_list123[1], 'Tree')
-    print('Tree basal: ', basal_species_list1, basal_ver_list4)
+    '''#todo sort list here
+    lista, listb, listc = sort_three_lists(lista, listb, listc)
+    print(lista, listb, listc)'''
+
     # call the common_name_extraction_fn function
     basal_species_list2, basal_ver_list5 = common_name_extraction_fn(shrub_series, basal_vert_list123[2], 'Shrub')
 
@@ -168,7 +181,7 @@ def main_routine(basal_csv, site, site_dir, shrub_list_excel):
     # print('basalVerList: ', basalVerList)
     return basal_hor_list1234, basal_vert_list123
 
-    print('scriptXX_BasalDataP.py COMPLETED')
+    print('script8_3_site_basal_sweep_data_extraction.py COMPLETED')
 
 
 if __name__ == '__main__':

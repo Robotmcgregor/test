@@ -26,7 +26,7 @@ import numpy as np
 warnings.filterwarnings("ignore")
 
 
-def transect_name_fn(tran, site):
+def transect_name_fn(tran, site):#todo move this to data clean
     """ Convert the transect name variable (tran -> transect).
 
             :param tran: string object containing the transect name variable.
@@ -115,21 +115,15 @@ def field_adjusted_fn(field, adjusted, represent):
     return field, adjusted, final
 
 
-def coerce_to_zero(input_list):
+def coerce_to_zero(input_list): #todo change params
     """ Loop through a list and convert Nan values to int(0).
 
             :param input_list: list object containing numeric values.
             :return output_list: processed list with null values converted to int(0)"""
 
-    output_list = []
-    for i in input_list:
-        if i:
-            n = 1
-        else:
-            n = 0
-        output_list.append(n)
+    input_list = [0 if x != x else x for x in input_list]
 
-    return output_list
+    return input_list
 
 
 def site_cover_fn(row):
@@ -267,11 +261,9 @@ def main_routine(clean_list, row, site):
 
     # call the vegFractions function
     species_list = veg_fractions_fn(row)
-    # print("vegFractions function complete.")
 
     # call the heightEstimate function
     height_list = height_estimates_fn(row)
-    # print("heightEstimate function complete.")
 
     # extend clean_list with the return variables.
     clean_list.extend([transect1])

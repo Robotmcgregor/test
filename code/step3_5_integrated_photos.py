@@ -37,13 +37,11 @@ def photo_url_fn(row, site):
     for i in range(8):
 
         dist = str(row['GROUP_PHOTOS:DEST' + str(i + 1)])
-        print('dist: ', dist)
         photo_list.extend([dist])
         for n in range(3):
 
             dist_photo = str(
                 row['GROUP_PHOTOS:GROUP_DEST' + str(i + 1) + '_PHOTO:DEST' + str(i + 1) + '_PHOTO' + str(n + 1)])
-            print('dist_photo: ', dist_photo)
             dist_bearing = str(row['GROUP_PHOTOS:GROUP_DEST' + str(i + 1) + '_PHOTO:DEST' + str(i + 1) + '_PHOTO' + str(
                 n + 1) + '_BEARING'])
             photo_list.append(dist_photo)

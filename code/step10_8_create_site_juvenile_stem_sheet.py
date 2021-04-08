@@ -288,11 +288,8 @@ def main_routine(color_fill, heading1, heading2, heading3, heading4, heading5, h
     # call the insert_default_values_fn function
     workbook, worksheet = insert_default_values_fn(workbook, worksheet, heading7)
 
-    # if obsData == 'starIntBasalWood' or 'starIntWood':
     woodyDataList = obs_data_list[4]
-    # woodyVerList = obs_data_list[11]
 
-    # print('woodyDataList: ', woodyDataList)
     if woodyDataList[0]:
         # call the insertDataFN function
         insert_vertical_data_fn(worksheet, 1, 5, woodyDataList[0], heading7, 1)

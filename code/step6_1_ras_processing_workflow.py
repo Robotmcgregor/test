@@ -106,7 +106,6 @@ def recorder_fn(row):
         recorder = recorder.replace('other', str((row['OFFICER_ONE:OTHER_RECORDER'])))
     # clean variable, remove white space and possible typos
     recorder = string_clean_title_fn(recorder)
-    # print(recorder)
     first, second = recorder.split(' ')
     obs_recorder = second + ', ' + first
 
@@ -124,7 +123,6 @@ def estimator_fn(row):
     if estimator == 'other':
         estimator = estimator.replace('other', str((row['OFFICER_TWO:OTHER_ESTIMATOR'])))
     estimator = string_clean_title_fn(estimator)
-    # print(estimator)
     first, second = estimator.split(' ')
     obs_estimator = second + ', ' + first
 
@@ -275,7 +273,6 @@ def main_routine(file_path, temp_dir, veg_list_excel, pastoral_estate):
 
         # call the gps_points_fn function to extract the longitude and latitude information.
         lat_lon_list = gps_points_fn(row)
-        # print("gpsPoints function complete.")
 
         # call the meta_date_fn function to extract the unique identifier information for each form record.
         meta_data_list = meta_data_fn(row)
@@ -286,14 +283,11 @@ def main_routine(file_path, temp_dir, veg_list_excel, pastoral_estate):
         # read in the estate shapefile and create series
         estate = gpd.read_file(pastoral_estate)
         estate_series = estate[['PROPERTY', 'PROP_TAG']]
-        print(estate_series)
 
         # extract the final property value
         final_prop = location_list[3:4][0]
-        print("final_prop: ", final_prop)
         # call the extract_prop_code_fn function to extract the property code
         prop_code, site_code = prop_code_extraction_fn(estate_series, final_prop, site)
-        print(prop_code, site_code)
 
         # create a clean list and append/extend output lists and variables
         clean_list = [site]

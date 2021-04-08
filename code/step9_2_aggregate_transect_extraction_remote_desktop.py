@@ -84,7 +84,7 @@ def close_diver_fn(driver):
     driver.close()
 
 
-def main_routine(obs_data_list, ras_data_list, site, site_dir, star):
+def main_routine(obs_data_list, site, site_dir, star):
     """
     Extract the URL's contained within the Star Transect ODK Aggregate .csv for the star transect repeats (transects).
     Open and log into ODK Aggregate using the testodk username and password,

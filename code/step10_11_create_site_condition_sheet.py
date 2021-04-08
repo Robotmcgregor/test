@@ -156,31 +156,32 @@ def main_routine(color_fill, heading1, heading2, heading3, heading4, heading7, w
 
     condition_data_list = obs_data_list[8]
 
-    # print('condition_data_list: ', condition_data_list)
     if condition_data_list[0]:
-
         # call the insertDataFN function
         insert_vertical_data_fn(worksheet, 2, 1, condition_data_list[0], heading7, 1)
 
+    if condition_data_list[1]:
         # call the insertDataFN function
         insert_horizontal_data_fn(worksheet, 9, 1, condition_data_list[1], heading7, 1)
+        print('condition_data_list[1]', condition_data_list[1][0])
 
+        if condition_data_list[1][0] == 'A':
+            score = 'Excellent'
+        elif condition_data_list[1][0] == 'B':
+            score = 'Good'
+        elif condition_data_list[1][0] == 'C':
+            score = ' Fair'
+        elif condition_data_list[1][0] == 'D':
+            score = 'Poor'
+        else:
+            score = 'ERROR'
+        print(score)
+        # call the insertDataFN function
+        insert_vertical_data_fn(worksheet, 9, 6, [score], heading7, 1)
+
+    if condition_data_list[2]:
         # call the insertDataFN function
         insert_vertical_data_fn(worksheet, 10, 1, condition_data_list[2], heading7, 1)
-
-    if condition_data_list[2] == 'A':
-        score = 'Excellent'
-    elif condition_data_list[2] == 'B':
-        score = 'Good'
-    elif condition_data_list[2] == 'C':
-        score = ' Fair'
-    elif condition_data_list[2] == 'D':
-        score = 'Poor'
-    else:
-        score = 'ERROR'
-
-    # call the insertDataFN function
-    insert_vertical_data_fn(worksheet, 10, 2, [score], heading7, 1)
 
     workbook.close()
     print('step10_11_create_condition_sheet.py COMPLETE.')

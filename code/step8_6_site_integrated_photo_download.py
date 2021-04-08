@@ -72,7 +72,6 @@ def photo_fn(df):
             list_a = [dist, dist_photo, dist_bearing]
             photo_list.append(list_a)
 
-    print('photo_list: ', photo_list)
     return photo_list
 
 

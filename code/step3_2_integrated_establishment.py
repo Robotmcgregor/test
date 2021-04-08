@@ -206,15 +206,12 @@ def main_routine(clean_list, row, string_clean_capital_fn, string_clean_title_fn
 
     # call the landscape_fn function
     landscape_list = landscape_fn(row, string_clean_capital_fn)
-    # print("landscape_fn function complete.")
 
     # call the land_system_fn function
     land_system_list = land_system_fn(row, string_clean_capital_fn)
-    # print("land_system_fn function complete.")
 
     # call the water_point_fn function
     water_point_list = water_point_fn(row, string_clean_capital_fn, string_clean_title_fn)
-    # print("water_point_fn function complete.")
 
     # call the trackFN function
     estab_track_list = estab_track_fn(row, string_clean_capital_fn)

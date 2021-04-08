@@ -76,7 +76,6 @@ def feral_extraction_fn(row, string_clean_capital_fn):
         str(i + 1)
         feral = string_clean_capital_fn(str(row['GROUP_FERAL:FERAL' + str(i + 1)]))
         feral_list.append(feral)
-        print(feral)
         feral_evid = string_clean_capital_fn(str(row['GROUP_FERAL:FERAL' + str(i + 1) + '_EVID']))
         feral_evid_list.append(feral_evid)
 
@@ -139,7 +138,6 @@ def sort_feral_list_fn(feral_list, required_list, final_list):
 
         n += 1
 
-    print('line 153: ', final_list)
     return final_list
 
 
@@ -232,19 +230,15 @@ def fire_fn(row):
 
     value = str(row['FIRE:NORTH_FF'])
     north_ff = (north_ff_values[value])
-    print(north_ff)
 
     value = str(row['FIRE:NORTH_FI'])
     north_fi = (north_fi_values[value])
-    print(north_fi)
 
     value = str(row['FIRE:SOUTH_FF'])
     south_ff = (south_ff_values[value])
-    print(south_ff)
 
     value = str(row['FIRE:SOUTH_FI'])
     south_fi = (south_fi_values[value])
-    print(south_fi)
 
     fire_list = [north_ff, north_fi, south_ff, south_fi]
     return fire_list

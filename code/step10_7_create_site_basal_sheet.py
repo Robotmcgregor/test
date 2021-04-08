@@ -371,8 +371,7 @@ def main_routine(color_fill, heading1, heading2, heading4, heading5, heading7, h
     workbook, worksheet = insert_default_values_fn(workbook, worksheet, heading7)
 
     basal_data_list = obs_data_list[3]
-    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++')
-    print('basal_data_list: ', basal_data_list)
+
     if basal_data_list[0]:
         # call the insert_horizontal_data_fn function
         insert_horizontal_data_fn(worksheet, 1, 11, ['Yes'], heading7, 2)
@@ -397,15 +396,12 @@ def main_routine(color_fill, heading1, heading2, heading4, heading5, heading7, h
         insert_vertical_data_fn(worksheet, 16, 1, basal_data_list[4], heading7, 1)
 
     # ------------------------------------------- Woody species -------------------------------------------------------
-    print(']]]]]]]]]]]]]]]]]]]]]]]]]]]]]]')
-    print(basal_data_list[5])
 
     if basal_data_list[5]:
 
         row = 22
         col = 0
         for i in basal_data_list[5]:
-            print(i)
             # call the insert_vertical_data_fn function
             insert_horizontal_data_fn(worksheet, row, col, i[:1], heading7, 1)
 
@@ -416,7 +412,6 @@ def main_routine(color_fill, heading1, heading2, heading4, heading5, heading7, h
         row = 22
         col = 5
         for i in basal_data_list[5]:
-            print(i)
             # call the insert_vertical_data_fn function
             insert_horizontal_data_fn(worksheet, row, col, i[1:], heading7, 1)
 

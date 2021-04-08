@@ -323,18 +323,29 @@ def main_routine(file_path, temp_dir, veg_list_excel):
         clean_list.extend(meta_data_list)
 
         # Replace clean list values (forb separation amendments to cover fractions if the veg_list is not empty
+        '''veg_list ([rep_veg, adj_perennial, adj_annual, adj_p_forb, field_a_forb, adj_a_forb,
+                    final_a_forb, adj_veg_total, final_veg_total])'''
+
+        ''''rep_veg', 'field_pg',
+        'adj_pg',
+        'final_pg', 'field_ag', 'adj_ag', 'final_ag', 'field_pf', 'adj_pf', 'final_pf', 'field_af', 'adj_af',
+        'final_af', 'field_veg_total', 'adj_veg_total', 'final_veg_total', 'height_tree', 'height_shrub','''
+
         if veg_list:
-            print('veg_list is not empty')  # todo double check that these variables hit the correct cells.
+            print('veg_list is not empty')  # todo double check that these variables hit the correct cells and uncomment them..
             print("veg_list: ", veg_list)
-            clean_list[96] = veg_list[0]
-            clean_list[98] = veg_list[1]
-            clean_list[101] = veg_list[3]
-            clean_list[104] = veg_list[4]
-            clean_list[106] = veg_list[5]
-            clean_list[107] = veg_list[6]
-            clean_list[108] = veg_list[7]
-            clean_list[109] = veg_list[8]
-            clean_list[110] = veg_list[9]
+            """clean_list[99] = veg_list[0]
+            clean_list[101] = veg_list[1]
+            clean_list[104] = veg_list[3]
+
+            clean_list[107] = veg_list[4]
+            clean_list[109] = veg_list[5]
+            clean_list[111] = veg_list[6]
+
+            clean_list[113] = veg_list[7]
+
+            clean_list[114] = veg_list[8]"""
+
 
         final_star_list.append(clean_list)
         final_star_photo_list.append(photo_url_list)
@@ -411,6 +422,8 @@ def main_routine(file_path, temp_dir, veg_list_excel):
             'cover_af_1', 'cover_af_2', 'cover_af_3', 'cover_af_4', 'cover_af_5', 'cover_af_6',
             'cover_af_7', 'cover_af_8', 'cover_af_9', 'cover_af_10']
 
+
+
     # replace all int and float missing variables with a 0 value
     star_transect_df[cols] = star_transect_df[cols].fillna(0)
 
@@ -419,6 +432,10 @@ def main_routine(file_path, temp_dir, veg_list_excel):
     csv_output = (temp_dir + '\\clean_star_transect.csv')
     star_transect_df3.to_csv(csv_output)
     print('-', csv_output)
+    print(star_transect_df3.final_veg.iloc[0]) #todo remove
+
+    """import sys
+    sys.exit()"""
 
     # create offset geoDataFrame and export a shapefile lon lat set to center points.
     star_transect_gdf = gpd.GeoDataFrame(
